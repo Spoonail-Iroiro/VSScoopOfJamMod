@@ -68,37 +68,39 @@ public class ItemJamSpoon : Item {
             ItemStack[] ingredientStacks = mealContainer.GetNonEmptyContents(world, mealContainerSlot.Itemstack);
             float servings = mealContainer.GetQuantityServings(world, mealContainerSlot.Itemstack);
 
-            // jam check
-            if (recipeCode != "jam") return false;
+            // Must be jam with at least 1 serving
+            if (recipeCode != "jam" || servings < 1.0f) return false;
 
-            // serving is enough check
-            if (servings < 1.0f) return false;
-
-            // ingredient check & calc
+            // Validate ingredients
             var ingredientInfo = JamItemizer.GetJamIngredientInfoFromIngredientStacks(ingredientStacks);
 
             if (ingredientInfo == null) return false;
 
+            // Create scoop of jam item stack
             var scoopOfJamItemStack = JamItemizer.GetScoopOfJam(ingredientInfo, world);
 
             if (scoopOfJamItemStack == null) return false;
 
-            // terminate if client side
+            // Client side only performs validation
             if (world.Side.IsClient()) return true;
 
-            // generate 
-            // transfer freshness
+            // Update freshness and validate recipe again
+            mealContainer.UpdateAndGetTransitionStates(world, mealContainerSlot);
+            if (recipeCode != "jam") return true; // Return true because mealContainerSlot is updated
+
+            // Transfer freshness from jam 
             TransitionableProperties[] tprops = scoopOfJamItemStack.Collectible.GetTransitionableProperties(api.World, scoopOfJamItemStack, null);
             var perishProps = tprops?.FirstOrDefault(p => p.Type == EnumTransitionType.Perish);
             var freshnessSlot = GetSlotForFreshness(mealContainerSlot, world);
             if (perishProps != null && freshnessSlot != null) {
                 perishProps.TransitionedStack.Resolve(api.World, "scooping jam");
+                // The default CarryOverTransition reduces spoilage for some reason
+                // so we use our own CarryOverFreshness to transfer transitioned rate as is
                 //CarryOverFreshness(api, periSlot, scoopOfJamItemStack, perishProps);
                 FoodUtil.CarryOverFreshness(api, freshnessSlot, scoopOfJamItemStack, perishProps);
             }
 
-            // take serving
-            // here, let's scoop the serving with dummy bowl
+            // Consume 1 serving using dummy bowl to invoke necessary processes such as replacing 0 serving crock with empty crock
             var dummySlot = new DummySlot();
             var bowlItemStack = new ItemStack(world.GetBlock(new AssetLocation("bowl-blue-fired")));
             dummySlot.Itemstack = bowlItemStack;
@@ -108,7 +110,7 @@ public class ItemJamSpoon : Item {
                 return false;
             }
 
-            // give
+            // Give scoop of jam to player
             if (!player.InventoryManager.TryGiveItemstack(scoopOfJamItemStack, true)) {
                 world.SpawnItemEntity(scoopOfJamItemStack, player.Entity.Pos.XYZ.AddCopy(0, 0.5, 0));
             }
@@ -118,9 +120,6 @@ public class ItemJamSpoon : Item {
                 player,
                 randomizePitch: false
             );
-
-
-            // MarkDirty-ing if necessary
 
             return true;
 
