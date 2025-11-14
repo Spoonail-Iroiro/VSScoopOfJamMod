@@ -1,0 +1,22 @@
+{
+  "code": "jamspoon",
+  "class": "scoopofjammod.ItemJamSpoon",
+  // "shape": {
+  //  "base": "game:item/lore/scroll"
+  // },
+  "variantGroups": [
+    {
+      "code": "material",
+      "states": ["wood"]
+    }
+  ],
+  "texture": {
+    "base": "item/jamspoon"
+  },
+  "creativeinventory": {
+    "general": ["*"],
+    "items": ["*"]
+  },
+  "maxstacksize": 1,
+  "materialDensity": 210
+}

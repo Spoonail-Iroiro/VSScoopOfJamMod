@@ -1,0 +1,111 @@
+{
+  "code": "scoopofjam",
+  "maxstacksize": 32,
+  "variantgroups": [
+    { "loadFromProperties": "block/fruit" },
+    {
+      "code": "sat",
+      "states": [ "same" ]
+    }
+  ],
+  "shape": { "base": "item/scoopofjam" },
+  "textures": {
+    "jam": {
+      "baseByType": {
+        "*pineapple-*": "game:block/food/pie/fill-pineapple",
+        "*apple-*": "game:block/food/pie/fill-apple",
+        "*": "game:block/food/pie/fill-{fruit}"
+      }
+    }
+  },
+  "behaviors": [],
+  "attributes": {
+    "inPieProperties": {
+      "textureByType": {
+        "*pineapple-*": "game:block/food/pie/fill-pineapple",
+        "*apple-*": "game:block/food/pie/fill-apple",
+        "*": "game:block/food/pie/fill-{fruit}"
+      },
+      "partType": "Filling"
+    },
+    "nutritionPropsWhenInMeal": {
+      "satietyByType": {
+        "*": 200
+      },
+      "foodcategory": "Fruit"
+    }
+  },
+  "creativeinventory": {
+    "general": [ "*" ],
+    "items": [ "*" ]
+  },
+  "transitionableProps": [
+    {
+      "type": "Perish",
+      "freshHours": { "avg": 540 },
+      "transitionHours": { "avg": 90 },
+      "transitionRatio": 1,
+      "transitionedStack": {
+        "type": "item",
+        "code": "game:rot"
+      }
+    }
+  ],
+  "materialDensity": 600,
+  "guiTransform": {
+    "rotation": {
+      "x": 142,
+      "y": -35,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.48,
+      "y": 0.09,
+      "z": 0.5
+    },
+    "scale": 2.2
+  },
+  "fpHandTransform": {
+    "translation": {
+      "x": 0.0468,
+      "y": -0.1,
+      "z": 0
+    },
+    "rotation": {
+      "x": 6,
+      "y": 49,
+      "z": 20
+    }
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": -2.08,
+      "y": -1.24,
+      "z": -1.22
+    },
+    "rotation": {
+      "x": -31,
+      "y": 11,
+      "z": -98
+    },
+    "scale": 0.38
+  },
+  "groundTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0.17,
+      "z": 0
+    },
+    "rotation": {
+      "x": -1,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.17,
+      "z": 0.5
+    },
+    "scale": 5
+  }
+}
