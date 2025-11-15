@@ -8,7 +8,7 @@
       "states": ["same"]
     }
   ],
-  "shape": { "base": "item/scoopofjam2" },
+  "shape": { "base": "item/scoopofjam" },
   "textures": {
     "jam": {
       "baseByType": {
