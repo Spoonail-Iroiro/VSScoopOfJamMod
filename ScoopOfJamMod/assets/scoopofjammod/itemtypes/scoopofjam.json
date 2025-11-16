@@ -27,17 +27,29 @@
         "*": "game:block/food/pie/fill-{fruit}"
       },
       "partType": "Filling"
-    },
-    "nutritionPropsWhenInMeal": {
-      "satietyByType": {
-        "*": 200
-      },
-      "foodcategory": "Fruit"
     }
+    // "nutritionPropsWhenInMeal": {
+    //   "satietyByType": {
+    //     "*": 200
+    //   },
+    //   "foodcategory": "Fruit"
+    // }
   },
   "creativeinventory": {
     "general": ["*"],
     "items": ["*"]
+  },
+  "nutritionProps": {
+    "satietyByType": {
+      "*-saguaro-equal": 170,
+      "*-cranberry-equal": 170,
+      "*-cherry-equal": 140,
+      "*-lychee-equal": 140,
+      "*-breadfruit-equal": 330,
+      "*-equal": 200,
+      "*": 10
+    },
+    "foodCategory": "Fruit"
   },
   "transitionableProps": [
     {
