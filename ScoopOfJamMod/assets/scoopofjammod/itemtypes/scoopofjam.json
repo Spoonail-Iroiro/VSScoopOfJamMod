@@ -5,7 +5,7 @@
     { "loadFromProperties": "block/fruit" },
     {
       "code": "sat",
-      "states": ["same"]
+      "states": ["equal"]
     }
   ],
   "shape": { "base": "item/scoopofjam" },

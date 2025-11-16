@@ -61,7 +61,7 @@ public class JamItemizer {
         var fruitItem = world.GetItem(ingredientInfo.FirstFruitCode);
         var fruitCode = fruitItem?.Variant["fruit"];
         if (fruitCode == null) return null;
-        var itemType = world.GetItem(new AssetLocation("scoopofjammod", $"scoopofjam-{fruitCode}-same"));
+        var itemType = world.GetItem(new AssetLocation("scoopofjammod", $"scoopofjam-{fruitCode}-equal"));
         if (itemType == null) return null;
         if (IsStrictRecipeCheck && ingredientInfo.SecondFruitCode == null) return null;
         var scoopOfJamItemStack = new ItemStack(itemType);
