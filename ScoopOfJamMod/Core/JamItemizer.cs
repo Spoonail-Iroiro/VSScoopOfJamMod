@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using ScoopOfJamMod.Items;
+using System.Collections.Generic;
 using System.Linq;
+using System;
 using Vintagestory.API.Common;
 
 namespace ScoopOfJamMod.Core;
@@ -30,13 +32,24 @@ public class JamItemizer {
 
             if (code.FirstCodePart() == "fruit" && code.Domain == "game") {
                 //ingredient.Collectible.NutritionProps.
+                //rtn.FirstFruitSatiety = ingredient.Collectible.NutritionProps.Satiety;
+                var sat = ingredient?.ItemAttributes?["nutritionPropsWhenInMeal"]?.AsObject<FoodNutritionProperties>()?.Satiety;
+                if (sat == null) {
+                    if (ScoopOfJamModModSystem.IsDebug()) {
+                        // Todo: throw own exception and handling
+                        throw new ArgumentException($"Ingredient invalid nutrition");
+                    }
+
+                    return null;
+                }
+
                 if (fruitCount == 0) {
                     rtn.FirstFruitCode = code;
-                    rtn.FirstFruitSatiety = ingredient.Collectible.NutritionProps.Satiety;
+                    rtn.FirstFruitSatiety = sat.Value;
                 }
                 else if (fruitCount == 1) {
                     rtn.SecondFruitCode = code;
-                    rtn.SecondFruitSatiety = ingredient.Collectible.NutritionProps.Satiety;
+                    rtn.SecondFruitSatiety = sat.Value;
 
                 }
                 ++fruitCount;
@@ -62,17 +75,18 @@ public class JamItemizer {
         var fruitCode = fruitItem?.Variant["fruit"];
         if (fruitCode == null) return null;
         var itemType = world.GetItem(new AssetLocation("scoopofjammod", $"scoopofjam-{fruitCode}-equal"));
-        if (itemType == null) return null;
+        if (itemType == null || itemType is not ItemScoopOfJam sojItem) return null;
         if (IsStrictRecipeCheck && ingredientInfo.SecondFruitCode == null) return null;
         var scoopOfJamItemStack = new ItemStack(itemType);
-        var secondFruitCode = ingredientInfo.SecondFruitCode ?? ingredientInfo.FirstFruitCode;
+        var secondFruitCode = ingredientInfo.SecondFruitCode ?? ingredientInfo.FirstFruitCode!;
         var secondFruitNutrition = ingredientInfo.SecondFruitCode != null ? ingredientInfo.SecondFruitSatiety : ingredientInfo.FirstFruitSatiety;
-        scoopOfJamItemStack.Attributes.SetString("secondFruitCode", secondFruitCode);
-        scoopOfJamItemStack.Attributes.SetFloat("secondFruitNutrition", secondFruitNutrition);
+
+        sojItem.SetScoopOfJamAttribute(scoopOfJamItemStack, new ScoopOfJamAttribute(secondFruitCode, secondFruitNutrition));
         scoopOfJamItemStack.StackSize = ScoopCountPerJam;
 
         return scoopOfJamItemStack;
 
     }
+
 
 }

@@ -1,5 +1,6 @@
 {
   "code": "scoopofjam",
+  "class": "scoopofjammod.ItemScoopOfJam",
   "maxstacksize": 32,
   "variantgroups": [
     { "loadFromProperties": "block/fruit" },
