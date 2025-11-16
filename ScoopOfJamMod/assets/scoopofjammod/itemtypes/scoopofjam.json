@@ -53,10 +53,10 @@
   ],
   "materialDensity": 600,
   "guiTransform": {
-    "translation": { "x": 2, "y": -1, "z": 0 },
-    "rotation": { "x": 138, "y": -138, "z": 7 },
+    "translation": { "x": 3, "y": -1, "z": 0 },
+    "rotation": { "x": 130, "y": -138, "z": -2 },
     "origin": { "x": 0.48, "y": 0.09, "z": 0.5 },
-    "scaleXyz": { "x": -3.49, "y": 3.49, "z": 3.49 }
+    "scaleXyz": { "x": -3.63, "y": 3.63, "z": 3.63 }
   },
   "fpHandTransform": {
     "translation": {
