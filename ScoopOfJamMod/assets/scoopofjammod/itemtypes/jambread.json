@@ -1,5 +1,6 @@
 {
   "code": "jambread",
+  "class": "scoopofjammod.ItemJamBread",
   "maxstacksizeByType": {
     "*": 32
   },
@@ -63,12 +64,12 @@
     "*": { "saturation": 300, "foodcategory": "Grain" }
   },
   "transitionablePropsByType": {
-    "*-perfect": [
+    "*-perfect-*": [
       {
         "type": "Perish",
         "freshHours": { "avg": 192 },
         "transitionHours": { "avg": 36 },
-        "transitionedStack": { "type": "item", "code": "rot" },
+        "transitionedStack": { "type": "item", "code": "game:rot" },
         "transitionRatio": 1
       }
     ]

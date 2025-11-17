@@ -79,9 +79,9 @@ public class JamItemizer {
         if (IsStrictRecipeCheck && ingredientInfo.SecondFruitCode == null) return null;
         var scoopOfJamItemStack = new ItemStack(itemType);
         var secondFruitCode = ingredientInfo.SecondFruitCode ?? ingredientInfo.FirstFruitCode!;
-        var secondFruitNutrition = ingredientInfo.SecondFruitCode != null ? ingredientInfo.SecondFruitSatiety : ingredientInfo.FirstFruitSatiety;
+        //var secondFruitNutrition = ingredientInfo.SecondFruitCode != null ? ingredientInfo.SecondFruitSatiety : ingredientInfo.FirstFruitSatiety;
 
-        sojItem.SetScoopOfJamAttribute(scoopOfJamItemStack, new ScoopOfJamAttribute(secondFruitCode, secondFruitNutrition));
+        sojItem.SetScoopOfJamAttribute(scoopOfJamItemStack, new ScoopOfJamAttribute(secondFruitCode));
         scoopOfJamItemStack.StackSize = ScoopCountPerJam;
 
         return scoopOfJamItemStack;

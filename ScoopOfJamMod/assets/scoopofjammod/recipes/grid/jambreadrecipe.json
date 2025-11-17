@@ -1,0 +1,29 @@
+[
+  {
+    "ingredientPattern": "KBJ",
+    "width": 3,
+    "height": 1,
+    "ingredients": {
+      "K": {
+        "type": "item",
+        "code": "game:knife-*",
+        "isTool": true
+      },
+      "B": {
+        "type": "item",
+        "code": "game:bread-*-perfect",
+        "name": "bread"
+      },
+      "J": {
+        "type": "item",
+        "code": "scoopofjam-*-equal",
+        "name": "fruit",
+        "quantity": 2
+      }
+    },
+    "output": {
+      "type": "item",
+      "code": "jambread-{bread}-perfect-{fruit}"
+    }
+  }
+]
