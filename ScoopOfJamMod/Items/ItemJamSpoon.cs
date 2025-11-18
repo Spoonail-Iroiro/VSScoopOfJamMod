@@ -68,16 +68,18 @@ public class ItemJamSpoon : Item {
             ItemStack[] ingredientStacks = mealContainer.GetNonEmptyContents(world, mealContainerSlot.Itemstack);
             float servings = mealContainer.GetQuantityServings(world, mealContainerSlot.Itemstack);
 
+            var debugMode = ScoopOfJamModModSystem.IsDebugMode(api);
+
             // Must be jam with at least 1 serving
             if (recipeCode != "jam" || servings < 1.0f) return false;
 
             // Validate ingredients
-            var ingredientInfo = JamItemizer.GetJamIngredientInfoFromIngredientStacks(ingredientStacks);
+            var ingredientInfo = JamItemizer.GetJamIngredientInfoFromIngredientStacks(api, ingredientStacks, debugMode);
 
             if (ingredientInfo == null) return false;
 
             // Create scoop of jam item stack
-            var scoopOfJamItemStack = JamItemizer.GetScoopOfJam(ingredientInfo, world);
+            var scoopOfJamItemStack = JamItemizer.GetScoopOfJam(api, ingredientInfo, world, debugMode);
 
             if (scoopOfJamItemStack == null) return false;
 
@@ -165,7 +167,7 @@ public class ItemJamSpoon : Item {
         for (int i = 0; i < inputSlots.Length; i++) {
             ItemSlot slot = inputSlots[i];
             if (slot.Empty) continue;
-            TransitionState state = slot.Itemstack?.Collectible?.UpdateAndGetTransitionState(api.World, slot, EnumTransitionType.Perish);
+            TransitionState? state = slot.Itemstack?.Collectible?.UpdateAndGetTransitionState(api.World, slot, EnumTransitionType.Perish);
             if (state == null) continue;
 
             quantity++;

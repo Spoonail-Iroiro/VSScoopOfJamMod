@@ -20,7 +20,7 @@ public class JamItemizer {
 
     public int ScoopCountPerJam { get; set; } = 2;
 
-    public JamIngredientInfo? GetJamIngredientInfoFromIngredientStacks(ItemStack[] ingredientStacks) {
+    public JamIngredientInfo? GetJamIngredientInfoFromIngredientStacks(ICoreAPI api, ItemStack[] ingredientStacks, bool isDebugMode = false) {
         int honeyCount = 0;
         int fruitCount = 0;
         var rtn = new JamIngredientInfo();
@@ -31,13 +31,10 @@ public class JamItemizer {
             var code = ingredient.Collectible.Code;
 
             if (code.FirstCodePart() == "fruit" && code.Domain == "game") {
-                //ingredient.Collectible.NutritionProps.
-                //rtn.FirstFruitSatiety = ingredient.Collectible.NutritionProps.Satiety;
                 var sat = ingredient?.ItemAttributes?["nutritionPropsWhenInMeal"]?.AsObject<FoodNutritionProperties>()?.Satiety;
                 if (sat == null) {
-                    if (ScoopOfJamModModSystem.IsDebug()) {
-                        // Todo: throw own exception and handling
-                        throw new ArgumentException($"Ingredient invalid nutrition");
+                    if (isDebugMode) {
+                        api.Logger.Error($"Ingredient {code} has no nutritionPropsWhenInMeal though it seems like vanilla fruits. Aborting getting ingredient info.");
                     }
 
                     return null;
@@ -64,18 +61,29 @@ public class JamItemizer {
         if (strictCheck) {
             // First and second fruit satiety should match: technical restriction to supress the number of jam pattern
             bool isFirstAndSecondSatietySame = (rtn.FirstFruitSatiety == rtn.SecondFruitSatiety);
-            if (fruitCount != 2 || honeyCount != 2 || !isFirstAndSecondSatietySame) return null;
+            if (fruitCount != 2 || honeyCount != 2 || !isFirstAndSecondSatietySame) {
+                if (isDebugMode) {
+                    api.Logger.Warning($"IsStrictRecipeCheck is enabled and check failed. fruitCount={fruitCount}, honeyCount={honeyCount}, isFirstAndSecondSatietySame={isFirstAndSecondSatietySame}");
+                }
+                return null;
+            }
         }
 
         return rtn;
     }
 
-    public ItemStack? GetScoopOfJam(JamIngredientInfo ingredientInfo, IWorldAccessor world) {
+    public ItemStack? GetScoopOfJam(ICoreAPI api, JamIngredientInfo ingredientInfo, IWorldAccessor world, bool isDebugMode = false) {
         var fruitItem = world.GetItem(ingredientInfo.FirstFruitCode);
         var fruitCode = fruitItem?.Variant["fruit"];
         if (fruitCode == null) return null;
-        var itemType = world.GetItem(new AssetLocation("scoopofjammod", $"scoopofjam-{fruitCode}-equal"));
-        if (itemType == null || itemType is not ItemScoopOfJam sojItem) return null;
+        var sojCode = $"scoopofjam-{fruitCode}-equal";
+        var itemType = world.GetItem(new AssetLocation("scoopofjammod", sojCode));
+        if (itemType == null || itemType is not ItemScoopOfJam sojItem) {
+            if (isDebugMode) {
+                api.Logger.Error($"Couldn't construct scoop of jam from fruit code. {sojCode} is unknown.");
+            }
+            return null;
+        }
         if (IsStrictRecipeCheck && ingredientInfo.SecondFruitCode == null) return null;
         var scoopOfJamItemStack = new ItemStack(itemType);
         var secondFruitCode = ingredientInfo.SecondFruitCode ?? ingredientInfo.FirstFruitCode!;

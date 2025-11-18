@@ -1,4 +1,5 @@
 ﻿using ScoopOfJamMod.Items;
+using System.Collections.Generic;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -13,6 +14,28 @@ namespace ScoopOfJamMod {
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemJamSpoon), typeof(ItemJamSpoon));
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemJamBread), typeof(ItemJamBread));
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemScoopOfJam), typeof(ItemScoopOfJam));
+
+            var rootCommand = api.ChatCommands
+                .Create("soj")
+                .WithDescription("Scoop of Jam mod commands");
+
+            var parsers = api.ChatCommands.Parsers;
+
+            var debugCommand = rootCommand
+                .BeginSubCommand("debug")
+                .WithDescription("Enable/disable debug mode")
+                .WithArgs(parsers.Bool("enabled"))
+                .HandleWith(args => {
+                    var enable = (bool)args.Parsers[0].GetValue();
+                    if (enable) {
+                        isDebugMode[api.Side] = true;
+                        return TextCommandResult.Success($"{Mod.Info.ModID} debug mode enabled");
+                    }
+                    else {
+                        isDebugMode[api.Side] = false;
+                        return TextCommandResult.Success($"{Mod.Info.ModID} debug mode disabled");
+                    }
+                });
         }
 
         public override void StartServerSide(ICoreServerAPI api) {
@@ -21,8 +44,27 @@ namespace ScoopOfJamMod {
         public override void StartClientSide(ICoreClientAPI api) {
         }
 
-        public static bool IsDebug() {
-            return false;
+        static Dictionary<EnumAppSide, bool> isDebugMode = new() {
+            [EnumAppSide.Client] = false,
+            [EnumAppSide.Server] = false,
+            [EnumAppSide.Universal] = false,
+        };
+
+        static void resetDebugModeFlags() {
+            isDebugMode = new() {
+                [EnumAppSide.Client] = false,
+                [EnumAppSide.Server] = false,
+                [EnumAppSide.Universal] = false,
+            };
+        }
+
+        public static bool IsDebugMode(ICoreAPI api) {
+            return isDebugMode[api.Side];
+        }
+
+        public override void Dispose() {
+            base.Dispose();
+            resetDebugModeFlags();
         }
 
     }
