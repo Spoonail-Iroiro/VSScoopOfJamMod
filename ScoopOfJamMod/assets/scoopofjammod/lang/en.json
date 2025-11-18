@@ -1,3 +1,7 @@
 {
-  "item-jamspoon": "Jam Spoon"
+  "item-jamspoon": "Jam Spoon",
+  "game:ingameerror-scoopofjammod-jamcheckfatal": "{0}",
+  "game:ingameerror-scoopofjammod-jamcheckstrictfailed": "This jam's Inredients are strange, so currently can't be scooped. {0}{1}",
+  "game:ingameerror-scoopofjammod-jamcheckdifferentfruitnutritions": "Two fruits in jam must have equal nutrition (e.g. red currant and pomegranate). {0}{1}",
+  "strict-jam-check-see-this": "See `.soj sjchelp` for more details. "
 }

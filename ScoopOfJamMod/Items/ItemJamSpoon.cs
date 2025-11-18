@@ -3,9 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
 namespace ScoopOfJamMod.Items;
@@ -24,7 +27,7 @@ public class ItemJamSpoon : Item {
         var mod = api.ModLoader.GetModSystem<ScoopOfJamModModSystem>();
         if (mod.Config == null) return false;
         // Set same value for both server and client side; config value is already synced from server to client
-        JamItemizer.IsStrictRecipeCheck = mod.Config.isJamCheckStrict;
+        JamItemizer.IsJamCheckStrict = mod.Config.isJamCheckStrict;
         configLoaded = true;
         return true;
     }
@@ -96,9 +99,24 @@ public class ItemJamSpoon : Item {
             if (recipeCode != "jam" || servings < 1.0f) return false;
 
             // Validate ingredients
-            var ingredientInfo = JamItemizer.GetJamIngredientInfoFromIngredientStacks(api, ingredientStacks, debugMode);
+            JamIngredientInfo ingredientInfo;
+            try {
+                ingredientInfo = JamItemizer.GetJamIngredientInfoFromIngredientStacks(api, ingredientStacks, debugMode);
+            }
+            catch (InvalidJamException je) {
+                string seeThis = Lang.Get("scoopofjammod:strict-jam-check-see-this");
+                string debugInfo = (je.ErrorLevel == JamErrorLevel.Fatal || debugMode) ? je.Message + " " : "";
 
-            if (ingredientInfo == null) return false;
+                var userMessage = Lang.Get("ingameerror-" + je.InGameErrorCode, debugInfo, seeThis);
+                if (api is ICoreClientAPI capi) {
+                    capi.TriggerIngameError(this, je.InGameErrorCode, userMessage);
+                }
+                else {
+                    api.Logger.Warning(userMessage);
+                }
+
+                return false;
+            }
 
             // Create scoop of jam item stack
             var scoopOfJamItemStack = JamItemizer.GetScoopOfJam(api, ingredientInfo, world, debugMode);
