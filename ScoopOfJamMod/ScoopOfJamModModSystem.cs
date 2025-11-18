@@ -1,4 +1,5 @@
-﻿using ScoopOfJamMod.Config;
+﻿using System;
+using ScoopOfJamMod.Config;
 using ScoopOfJamMod.Items;
 using System.Collections.Generic;
 using Vintagestory.API.Client;
@@ -8,7 +9,13 @@ using Vintagestory.API.Server;
 
 namespace ScoopOfJamMod {
     public class ScoopOfJamModModSystem : ModSystem {
+        ICoreClientAPI? capi;
+        ICoreServerAPI? sapi;
 
+        public string NetworkChannelName { get { return Mod.Info.ModID + "-" + nameof(ScoopOfJamModModSystem); } }
+
+        // Server config
+        // Server should restart after change because syncing to client is only performed on join
         public ScoopOfJamModConfig? Config { get; private set; }
 
         public string ConfigName {
@@ -17,12 +24,14 @@ namespace ScoopOfJamMod {
             }
         }
 
-        // Called on server and client
-        // Useful for registering block/entity classes on both sides
         public override void Start(ICoreAPI api) {
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemJamSpoon), typeof(ItemJamSpoon));
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemJamBread), typeof(ItemJamBread));
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemScoopOfJam), typeof(ItemScoopOfJam));
+
+            api.Network
+                .RegisterChannel(NetworkChannelName)
+                .RegisterMessageType<ScoopOfJamModConfig>();
 
             var rootCommand = api.ChatCommands
                 .Create("soj")
@@ -60,6 +69,7 @@ namespace ScoopOfJamMod {
         }
 
         public override void StartServerSide(ICoreServerAPI api) {
+            sapi = api;
             // Load or initialize the config file
             Config = api.LoadModConfig<ScoopOfJamModConfig>(ConfigName);
             if (Config == null) {
@@ -67,6 +77,9 @@ namespace ScoopOfJamMod {
                 api.StoreModConfig(Config, ConfigName);
             }
             isServerDebugMode = Config.isDebugMode;
+
+            // Sync server config to client on join
+            api.Event.PlayerJoin += Event_PlayerJoin;
 
             var parsers = api.ChatCommands.Parsers;
 
@@ -92,11 +105,24 @@ namespace ScoopOfJamMod {
                     api.StoreModConfig(Config, ConfigName);
 
                     var enableStr = enable ? "enabled" : "disabled";
-                    return TextCommandResult.Success($"{Mod.Info.ModID} strict jam check {enableStr}");
+                    return TextCommandResult.Success($"{Mod.Info.ModID} strict jam check {enableStr}. A server restart is required to properly apply this change.");
                 });
         }
 
         public override void StartClientSide(ICoreClientAPI api) {
+            capi = api;
+
+            capi.Network
+                .GetChannel(NetworkChannelName)
+                .SetMessageHandler<ScoopOfJamModConfig>(OnReceivedConfig);
+        }
+
+        protected void Event_PlayerJoin(IServerPlayer player) {
+            sapi!.Network.GetChannel(NetworkChannelName).SendPacket(Config, player);
+        }
+
+        protected void OnReceivedConfig(ScoopOfJamModConfig config) {
+            Config = config;
         }
 
         static bool isClientDebugMode = false;

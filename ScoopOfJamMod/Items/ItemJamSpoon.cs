@@ -10,14 +10,36 @@ using Vintagestory.GameContent;
 
 namespace ScoopOfJamMod.Items;
 public class ItemJamSpoon : Item {
-    public bool IsJamCheckStrict { get; set; } = true;
-
     // Handles jam -> scoop processing and holds some settings
     public JamItemizer JamItemizer { get; private set; } = new JamItemizer();
+
+    bool configLoaded = false;
+
+    public override void OnLoaded(ICoreAPI api) {
+        base.OnLoaded(api);
+    }
+
+    public bool LoadConfig(ICoreAPI api) {
+        if (configLoaded) return true;
+        var mod = api.ModLoader.GetModSystem<ScoopOfJamModModSystem>();
+        if (mod.Config == null) return false;
+        // Set same value for both server and client side; config value is already synced from server to client
+        JamItemizer.IsStrictRecipeCheck = mod.Config.isJamCheckStrict;
+        configLoaded = true;
+        return true;
+    }
 
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling) {
         if (blockSel?.Position == null || byEntity is not EntityPlayer byPlayer) {
             base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+            return;
+        }
+
+        var configLoaded = LoadConfig(api);
+        if (!configLoaded) {
+            if (ScoopOfJamModModSystem.IsDebugMode(api)) {
+                api.Logger.Warning($"Server config not loaded! Can't scoop.");
+            }
             return;
         }
 
