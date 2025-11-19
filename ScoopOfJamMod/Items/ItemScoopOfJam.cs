@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using ScoopOfJamMod.Util;
+using System.Collections.Generic;
 using System.Linq;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 
 namespace ScoopOfJamMod.Items;
@@ -23,6 +25,26 @@ public record class ScoopOfJamAttribute(
 }
 
 public class ItemScoopOfJam : Item {
+    public override string GetHeldItemName(ItemStack itemStack) {
+
+        var firstFruit = itemStack.Item?.Variant["fruit"];
+        if (firstFruit == null) {
+            return base.GetHeldItemName(itemStack);
+        }
+
+        var scoopOfJamAttribute = ScoopOfJamAttribute.FromTreeAttribute(itemStack.Attributes);
+
+        var langCode = TrUtil.GetTranslateLocale();
+
+        var jamIngredientText = TrUtil.GetJamIngredientText(api, langCode, firstFruit, scoopOfJamAttribute);
+
+        //jamIngredientText = TrUtil.ToLowerAutoCase(langCode, jamIngredientText);
+
+        var itemName = Lang.GetL(langCode, TrUtil.LK($"scoopofjam"), jamIngredientText);
+
+        return itemName;
+    }
+
     public ScoopOfJamAttribute? GetScoopOfJamAttribute(ItemStack stack) {
         return ScoopOfJamAttribute.FromTreeAttribute(stack.Attributes);
     }

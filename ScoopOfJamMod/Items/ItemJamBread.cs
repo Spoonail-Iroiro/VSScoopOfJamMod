@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScoopOfJamMod.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,6 +51,7 @@ public class ItemJamBread : Item {
         var langCode = TrUtil.GetTranslateLocale();
 
         var jamIngredientText = TrUtil.GetJamIngredientText(api, langCode, firstFruit, scoopOfJamAttribute);
+        //jamIngredientText = TrUtil.ToHeadUpperAutoCase(langCode, jamIngredientText);
 
         var breadName = Lang.GetL(langCode, TrUtil.LK($"jambread-{grain}-perfect"), jamIngredientText);
 
