@@ -18,10 +18,15 @@ namespace ScoopOfJamMod {
         // Server should restart after change because syncing to client is only performed on join
         public ScoopOfJamModConfig? Config { get; private set; }
 
+        public static string ModID { get; private set; } = "";
+
         public string ConfigName {
             get {
                 return Mod.Info.ModID + ".json";
             }
+        }
+        public override void StartPre(ICoreAPI api) {
+            ModID = Mod.Info.ModID;
         }
 
         public override void Start(ICoreAPI api) {

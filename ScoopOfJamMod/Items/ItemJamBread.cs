@@ -44,23 +44,14 @@ public class ItemJamBread : Item {
         var firstFruit = itemStack.Item?.Variant["fruit"];
         var grain = itemStack.Item?.Variant["type"];
         if (firstFruit == null || grain == null) return base.GetHeldItemName(itemStack);
+
         var scoopOfJamAttribute = ScoopOfJamAttribute.FromTreeAttribute(itemStack.Attributes);
-        var secondFruit = scoopOfJamAttribute == null ? firstFruit : (api.World.GetItem(scoopOfJamAttribute.secondFruitCode)?.Variant["fruit"] ?? firstFruit);
 
-        var langCode = "en";
-        var prefix = "scoopofjammod:";
+        var langCode = TrUtil.GetTranslateLocale();
 
-        var jamIngredientLangKey = (firstFruit == secondFruit) ? prefix + "jam-ingredient-single" : prefix + "jam-ingredient-double";
+        var jamIngredientText = TrUtil.GetJamIngredientText(api, langCode, firstFruit, scoopOfJamAttribute);
 
-        // Prevent partial translation
-        if (Lang.HasTranslation(jamIngredientLangKey)) langCode = Lang.CurrentLocale;
-
-        var firstFruitName = Lang.GetL(langCode, firstFruit != "pineapple" ? $"item-fruit-{firstFruit}" : "pineapple-in-jam-name");
-        var secondFruitName = Lang.GetL(langCode, secondFruit != "pineapple" ? $"item-fruit-{secondFruit}" : "pineapple-in-jam-name");
-
-        var jamIngredient = Lang.GetL(langCode, jamIngredientLangKey, firstFruitName, secondFruitName);
-
-        var breadName = Lang.GetL(langCode, prefix + $"jambread-{grain}-perfect", jamIngredient);
+        var breadName = Lang.GetL(langCode, TrUtil.LK($"jambread-{grain}-perfect"), jamIngredientText);
 
         return breadName;
     }
