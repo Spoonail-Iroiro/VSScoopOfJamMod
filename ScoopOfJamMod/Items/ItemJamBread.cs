@@ -40,7 +40,30 @@ public record class ExtraNutritionPropsAttribute(
 }
 
 public class ItemJamBread : Item {
-    // TODO: Inherit nutrition and perish on crafting
+    public override string GetHeldItemName(ItemStack itemStack) {
+        var firstFruit = itemStack.Item?.Variant["fruit"];
+        var grain = itemStack.Item?.Variant["type"];
+        if (firstFruit == null || grain == null) return base.GetHeldItemName(itemStack);
+        var scoopOfJamAttribute = ScoopOfJamAttribute.FromTreeAttribute(itemStack.Attributes);
+        var secondFruit = scoopOfJamAttribute == null ? firstFruit : (api.World.GetItem(scoopOfJamAttribute.secondFruitCode)?.Variant["fruit"] ?? firstFruit);
+
+        var langCode = "en";
+        var prefix = "scoopofjammod:";
+
+        var jamIngredientLangKey = (firstFruit == secondFruit) ? prefix + "jam-ingredient-single" : prefix + "jam-ingredient-double";
+
+        // Prevent partial translation
+        if (Lang.HasTranslation(jamIngredientLangKey)) langCode = Lang.CurrentLocale;
+
+        var firstFruitName = Lang.GetL(langCode, firstFruit != "pineapple" ? $"item-fruit-{firstFruit}" : "pineapple-in-jam-name");
+        var secondFruitName = Lang.GetL(langCode, secondFruit != "pineapple" ? $"item-fruit-{secondFruit}" : "pineapple-in-jam-name");
+
+        var jamIngredient = Lang.GetL(langCode, jamIngredientLangKey, firstFruitName, secondFruitName);
+
+        var breadName = Lang.GetL(langCode, prefix + $"jambread-{grain}-perfect", jamIngredient);
+
+        return breadName;
+    }
 
     public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo) {
         base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);

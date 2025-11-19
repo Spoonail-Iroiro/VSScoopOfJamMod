@@ -1,0 +1,16 @@
+{
+  "item-jamspoon-wood": "Jam spoon",
+  "jam-ingredient-single": "{0}",
+  "jam-ingredient-double": "{0}＆{1}",
+  "scoopofjam-template-single": "ひとすくいの{0}ジャム",
+  "jambread-spelt-perfect": "スペルト小麦の{0}ジャムパン",
+  "jambread-rye-perfect": "ライ麦の{0}ジャムパン",
+  "jambread-flax-perfect": "亜麻の{0}ジャムパン",
+  "jambread-rice-perfect": "米粉の{0}ジャムパン",
+  "jambread-cassava-perfect": "キャッサバの{0}ジャムパン",
+  "jambread-amaranth-perfect": "アマランサスの{0}ジャムパン",
+  "game:ingameerror-scoopofjammod-jamcheckfatal": "{0}",
+  "game:ingameerror-scoopofjammod-jamcheckstrictfailed": "This jam's Inredients are strange, so currently can't be scooped. {0}{1}",
+  "game:ingameerror-scoopofjammod-jamcheckdifferentfruitnutritions": "Two fruits in jam must have equal nutrition (e.g. red currant and pomegranate). {0}{1}",
+  "strict-jam-check-see-this": "See `.soj sjchelp` for more details. "
+}
