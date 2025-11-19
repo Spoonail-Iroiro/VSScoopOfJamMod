@@ -178,7 +178,7 @@ public class ItemJamBread : Item {
                 }
 
                 // TODO: calc from scoop per jam (unable because we can't refer to ingredients on server side) 
-                var quantity = 2;
+                var quantity = 1;
 
                 // Set extra nutrition
                 var extraNut = new Dictionary<EnumFoodCategory, float>();
