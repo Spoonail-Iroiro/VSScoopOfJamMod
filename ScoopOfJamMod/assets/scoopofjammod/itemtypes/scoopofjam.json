@@ -36,14 +36,21 @@
     //   "foodcategory": "Fruit"
     // }
   },
-  "creativeinventory": {
-    "general": ["*"],
-    "items": ["*"]
-  },
+  "creativeinventoryStacks": [
+    {
+      "tabs": ["general", "items"],
+      "stacks": [
+        {
+          "type": "Item",
+          "code": "scoopofjammod:scoopofjam-{fruit}-equal",
+          "attributes": { "secondFruitCode": "game:fruit-{fruit}" }
+        }
+      ]
+    }
+  ],
   "nutritionProps": {
     "satietyByType": {
-      "*-saguaro-equal": 170,
-      "*-cranberry-equal": 170,
+      "@.*-(saguaro|cranberry)-equal": 170,
       "*-cherry-equal": 140,
       "*-lychee-equal": 140,
       "*-breadfruit-equal": 330,

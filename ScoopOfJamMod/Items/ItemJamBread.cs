@@ -18,7 +18,8 @@ public record class ExtraNutritionPropsAttribute(
         var extraNutDictTree = new TreeAttribute();
 
         foreach (var kv in extraNutrition) {
-            extraNutDictTree.SetFloat(kv.Key.ToString(), kv.Value);
+            // To make it compatible with json item stack (in creativeInventoryStacks), we store value as double
+            extraNutDictTree.SetDouble(kv.Key.ToString(), kv.Value);
         }
 
         attr["extraNutrition"] = extraNutDictTree;
@@ -31,8 +32,8 @@ public record class ExtraNutritionPropsAttribute(
         var extraNut = new Dictionary<EnumFoodCategory, float>();
         foreach (var key in extraNutDictTree.Keys) {
             if (Enum.TryParse(key, out EnumFoodCategory cat)) {
-                var satVal = extraNutDictTree.GetFloat(key);
-                extraNut[cat] = satVal;
+                var satVal = extraNutDictTree.GetDouble(key);
+                extraNut[cat] = (float)satVal;
             }
         }
 
@@ -53,7 +54,7 @@ public class ItemJamBread : Item {
         var jamIngredientText = TrUtil.GetJamIngredientText(api, langCode, firstFruit, scoopOfJamAttribute);
         //jamIngredientText = TrUtil.ToHeadUpperAutoCase(langCode, jamIngredientText);
 
-        var breadName = Lang.GetL(langCode, TrUtil.LK($"jambread-{grain}-perfect"), jamIngredientText);
+        var breadName = Lang.GetL(langCode, TrUtil.LK($"jambread-{grain}-perfect-template"), jamIngredientText);
 
         return breadName;
     }

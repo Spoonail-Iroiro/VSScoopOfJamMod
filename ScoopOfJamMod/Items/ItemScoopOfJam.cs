@@ -18,7 +18,6 @@ public record class ScoopOfJamAttribute(
         var secondFruitCodeString = tree.GetString("secondFruitCode");
         if (secondFruitCodeString == null) return null;
         var secondFruitCode = new AssetLocation(secondFruitCodeString);
-        //var secondFruitNutrition = stack.Attributes.GetFloat("secondFruitNutrition");
 
         return new ScoopOfJamAttribute(secondFruitCode);
     }
@@ -40,7 +39,7 @@ public class ItemScoopOfJam : Item {
 
         //jamIngredientText = TrUtil.ToLowerAutoCase(langCode, jamIngredientText);
 
-        var itemName = Lang.GetL(langCode, TrUtil.LK($"scoopofjam"), jamIngredientText);
+        var itemName = Lang.GetL(langCode, TrUtil.LK($"scoopofjam-template"), jamIngredientText);
 
         return itemName;
     }

@@ -51,7 +51,28 @@
       "jam": { "base": "game:block/food/pie/fill-{fruit}" }
     }
   },
-  "creativeinventory": { "general": ["*"], "items": ["*"] },
+  "creativeinventoryStacks": [
+    {
+      "tabs": ["general", "items"],
+      "stacks": [
+        {
+          "type": "Item",
+          "code": "scoopofjammod:jambread-{type}-perfect-{fruit}",
+          "attributes": {
+            "secondFruitCode": "game:fruit-{fruit}",
+            "extraNutrition": {
+              "FruitByType": {
+                "@.*-(saguaro|cranberry)": 170.0,
+                "@.*-(cherry|lychee)": 140.0,
+                "*-breadfruit": 330.0,
+                "*": 200.0
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
   "attributes": {
     "displaycaseable": true,
     "shelvable": true
