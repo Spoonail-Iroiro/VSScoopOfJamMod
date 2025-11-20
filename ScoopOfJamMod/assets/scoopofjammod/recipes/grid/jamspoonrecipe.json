@@ -1,0 +1,22 @@
+[
+  {
+    "ingredientPattern": "_S,KS",
+    "width": 2,
+    "height": 2,
+    "ingredients": {
+      "K": {
+        "type": "item",
+        "code": "game:knife-*",
+        "isTool": true
+      },
+      "S": {
+        "type": "item",
+        "code": "game:stick"
+      }
+    },
+    "output": {
+      "type": "item",
+      "code": "jamspoon-wood"
+    }
+  }
+]

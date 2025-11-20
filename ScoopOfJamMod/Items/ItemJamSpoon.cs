@@ -3,21 +3,46 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
 namespace ScoopOfJamMod.Items;
 public class ItemJamSpoon : Item {
-    public bool IsStrictRecipeCheck { get; set; } = true;
-
     // Handles jam -> scoop processing and holds some settings
     public JamItemizer JamItemizer { get; private set; } = new JamItemizer();
+
+    bool configLoaded = false;
+
+    public override void OnLoaded(ICoreAPI api) {
+        base.OnLoaded(api);
+    }
+
+    public bool LoadConfig(ICoreAPI api) {
+        if (configLoaded) return true;
+        var mod = api.ModLoader.GetModSystem<ScoopOfJamModModSystem>();
+        if (mod.Config == null) return false;
+        // Set same value for both server and client side; config value is already synced from server to client
+        JamItemizer.IsJamCheckStrict = mod.Config.isJamCheckStrict;
+        configLoaded = true;
+        return true;
+    }
 
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling) {
         if (blockSel?.Position == null || byEntity is not EntityPlayer byPlayer) {
             base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+            return;
+        }
+
+        var configLoaded = LoadConfig(api);
+        if (!configLoaded) {
+            if (ScoopOfJamModModSystem.IsDebugMode(api)) {
+                api.Logger.Warning($"Server config not loaded! Can't scoop.");
+            }
             return;
         }
 
@@ -51,11 +76,10 @@ public class ItemJamSpoon : Item {
 
                 return;
             }
-
-
         }
-
-        base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+        else {
+            base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+        }
     }
 
     void ScoopFromBlock(Block selectedBlock, BlockPos pos, IWorldAccessor world) {
@@ -68,16 +92,33 @@ public class ItemJamSpoon : Item {
             ItemStack[] ingredientStacks = mealContainer.GetNonEmptyContents(world, mealContainerSlot.Itemstack);
             float servings = mealContainer.GetQuantityServings(world, mealContainerSlot.Itemstack);
 
+            var debugMode = ScoopOfJamModModSystem.IsDebugMode(api);
+
             // Must be jam with at least 1 serving
             if (recipeCode != "jam" || servings < 1.0f) return false;
 
             // Validate ingredients
-            var ingredientInfo = JamItemizer.GetJamIngredientInfoFromIngredientStacks(ingredientStacks);
+            JamIngredientInfo ingredientInfo;
+            try {
+                ingredientInfo = JamItemizer.GetJamIngredientInfoFromIngredientStacks(api, ingredientStacks, debugMode);
+            }
+            catch (InvalidJamException je) {
+                string seeThis = Lang.Get("scoopofjammod:strict-jam-check-see-this");
+                string debugInfo = (je.ErrorLevel == JamErrorLevel.Fatal || debugMode) ? je.Message + " " : "";
 
-            if (ingredientInfo == null) return false;
+                var userMessage = Lang.Get("ingameerror-" + je.InGameErrorCode, debugInfo, seeThis);
+                if (api is ICoreClientAPI capi) {
+                    capi.TriggerIngameError(this, je.InGameErrorCode, userMessage);
+                }
+                else {
+                    api.Logger.Warning(userMessage);
+                }
+
+                return false;
+            }
 
             // Create scoop of jam item stack
-            var scoopOfJamItemStack = JamItemizer.GetScoopOfJam(ingredientInfo, world);
+            var scoopOfJamItemStack = JamItemizer.GetScoopOfJam(api, ingredientInfo, world, debugMode);
 
             if (scoopOfJamItemStack == null) return false;
 
@@ -132,85 +173,11 @@ public class ItemJamSpoon : Item {
         if (mealContainerSlot.Itemstack?.Block is BlockCookedContainerBase mealContainer) {
             var contentStacks = mealContainer.GetNonEmptyContents(world, mealContainerSlot.Itemstack);
             var dummyInv = new DummyInventory(api);
-            //dummyInv.OnAcquireTransitionSpeed += (transType, stack, mul) => {
-            //    float val = mul * 1.0f;// GetContainingTransitionModifierContained(world, inSlot, transType);
-
-            //    if (mealContainerSlot.Inventory != null) val *= mealContainerSlot.Inventory.GetTransitionSpeedMul(transType, mealContainerSlot.Itemstack);
-
-            //    return val;
-            //};
             var periSlot = BlockCrock.GetDummySlotForFirstPerishableStack(world, contentStacks, null, dummyInv);
             if (periSlot.Empty) return null;
             return periSlot;
-            //var sb = new StringBuilder();
-            //var spoilage = periSlot.Itemstack?.Collectible.AppendPerishableInfoText(periSlot, sb, world);
         }
 
         return null;
     }
-
-
-    void COFreshness(ICoreAPI api, ItemSlot inputSlot, ItemStack outStack, TransitionableProperties perishProps) {
-        COFreshness(api, [inputSlot], [outStack], perishProps);
-    }
-
-    void COFreshness(ICoreAPI api, ItemSlot[] inputSlots, ItemStack[] outStacks, TransitionableProperties perishProps) {
-
-        float transitionedHoursRelative = 0;
-
-        float spoilageRelMax = 0;
-        float spoilageRel = 0;
-        int quantity = 0;
-
-        for (int i = 0; i < inputSlots.Length; i++) {
-            ItemSlot slot = inputSlots[i];
-            if (slot.Empty) continue;
-            TransitionState state = slot.Itemstack?.Collectible?.UpdateAndGetTransitionState(api.World, slot, EnumTransitionType.Perish);
-            if (state == null) continue;
-
-            quantity++;
-            float val = state.TransitionedHours / (state.TransitionHours + state.FreshHours);
-
-            float spoilageRelOne = Math.Max(0, (state.TransitionedHours - state.FreshHours) / state.TransitionHours);
-            spoilageRelMax = Math.Max(spoilageRelOne, spoilageRelMax);
-
-            transitionedHoursRelative += val;
-            spoilageRel += spoilageRelOne;
-        }
-
-        transitionedHoursRelative /= Math.Max(1, quantity);
-        spoilageRel /= Math.Max(1, quantity);
-
-        for (int i = 0; i < outStacks.Length; i++) {
-            if (outStacks[i] == null) continue;
-
-            if (!(outStacks[i].Attributes["transitionstate"] is ITreeAttribute)) {
-                outStacks[i].Attributes["transitionstate"] = new TreeAttribute();
-            }
-
-            float transitionHours = perishProps.TransitionHours.nextFloat(1, api.World.Rand);
-            float freshHours = perishProps.FreshHours.nextFloat(1, api.World.Rand);
-
-            ITreeAttribute attr = (ITreeAttribute)outStacks[i].Attributes["transitionstate"];
-            attr.SetDouble("createdTotalHours", api.World.Calendar.TotalHours);
-            attr.SetDouble("lastUpdatedTotalHours", api.World.Calendar.TotalHours);
-
-            attr["freshHours"] = new FloatArrayAttribute(new float[] { freshHours });
-            attr["transitionHours"] = new FloatArrayAttribute(new float[] { transitionHours });
-
-            if (spoilageRel > 0) {
-                // If already spoiled: Take away 40% spoilage and 2 hours
-                spoilageRel *= 0.6f;
-                attr["transitionedHours"] = new FloatArrayAttribute(new float[] { freshHours + Math.Max(0, transitionHours * spoilageRel - 2) });
-
-            }
-            else {
-                // If not yet spoiled: Weird formula :D
-                attr["transitionedHours"] = new FloatArrayAttribute(new float[] { Math.Max(0, transitionedHoursRelative * (0.8f + (2 + quantity) * spoilageRelMax) * (transitionHours + freshHours)) });
-            }
-
-
-        }
-    }
-
 }

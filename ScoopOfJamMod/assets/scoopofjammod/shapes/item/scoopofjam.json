@@ -9,7 +9,7 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"jam": "block/food/pie/fill-pear"
+		// "jam": "block/food/pie/fill-pear"
 	},
 	"elements": [
 		{

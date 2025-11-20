@@ -10,13 +10,44 @@
       "states": ["wood"]
     }
   ],
-  "texture": {
-    "base": "item/jamspoon"
+  "attributes": {
+    "heldItemPitchFollow": 1,
+    "toolrackTransform": {
+      "translation": { "x": -0.3, "y": 0.6, "z": 0.025 },
+      "rotation": { "x": 0, "y": 180, "z": 3 },
+      "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+      "scale": 1.8
+    }
   },
+  "shape": { "base": "item/jamspoon" },
+  "textures": {
+    "handle": {
+      "base": "game:item/tool/material/handle"
+    }
+  },
+  "tool": "wrench",
   "creativeinventory": {
     "general": ["*"],
-    "items": ["*"]
+    "items": ["*"],
+    "tools": ["*"]
   },
   "maxstacksize": 1,
-  "materialDensity": 210
+  "materialDensity": 210,
+  "guiTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": -74, "y": 49, "z": 8 },
+    "origin": { "x": 0.5299, "y": 0, "z": 0.48 },
+    "scale": 2.56
+  },
+  "groundTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 4.5
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.85, "y": -0.58, "z": -0.12 },
+    "rotation": { "x": 90, "y": 1, "z": 0 },
+    "scale": 0.84
+  }
 }
