@@ -76,11 +76,10 @@ public class ItemJamSpoon : Item {
 
                 return;
             }
-
-
         }
-
-        base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+        else {
+            base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+        }
     }
 
     void ScoopFromBlock(Block selectedBlock, BlockPos pos, IWorldAccessor world) {

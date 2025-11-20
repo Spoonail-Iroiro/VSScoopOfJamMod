@@ -1,13 +1,11 @@
 {
-    "type": "code",
-    "modid": "scoopofjammod",
-    "name": "Scoop of Jam",
-    "authors": [
-        "Spoonail"
-    ],
-    "description": "To be added",
-    "version": "0.1.0",
-    "dependencies": {
-        "game": ""
-    }
+  "type": "code",
+  "modid": "scoopofjammod",
+  "name": "Scoop of Jam",
+  "authors": [ "Spoonail" ],
+  "description": "Scoop jam with a spoon to make jam sandwich and jam pies!",
+  "version": "0.0.1",
+  "dependencies": {
+    "game": "1.21.0"
+  }
 }

@@ -13,8 +13,8 @@
   "attributes": {
     "heldItemPitchFollow": 1,
     "toolrackTransform": {
-      "translation": { "x": -0.3, "y": 0.6, "z": -0.1 },
-      "rotation": { "x": 97, "y": 180, "z": 3 },
+      "translation": { "x": -0.3, "y": 0.6, "z": 0.025 },
+      "rotation": { "x": 0, "y": 180, "z": 3 },
       "origin": { "x": 0.5, "y": 0, "z": 0.5 },
       "scale": 1.8
     }
@@ -25,6 +25,7 @@
       "base": "game:item/tool/material/handle"
     }
   },
+  "tool": "wrench",
   "creativeinventory": {
     "general": ["*"],
     "items": ["*"],

@@ -51,8 +51,7 @@
   "nutritionProps": {
     "satietyByType": {
       "@.*-(saguaro|cranberry)-equal": 170,
-      "*-cherry-equal": 140,
-      "*-lychee-equal": 140,
+      "@.*-(cherry|lychee)-equal": 140,
       "*-breadfruit-equal": 330,
       "*-equal": 200,
       "*": 10
