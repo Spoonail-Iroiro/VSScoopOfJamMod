@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Util;
+using Vintagestory.GameContent;
 
 namespace ScoopOfJamMod.Items;
 
@@ -41,7 +43,7 @@ public record class ExtraNutritionPropsAttribute(
     }
 }
 
-public class ItemJamBread : Item {
+public class ItemJamBread : Item, IHandBookPageCodeProvider {
     public override string GetHeldItemName(ItemStack itemStack) {
         var firstFruit = itemStack.Item?.Variant["fruit"];
         var grain = itemStack.Item?.Variant["type"];
@@ -170,6 +172,7 @@ public class ItemJamBread : Item {
                 if (jamAttr != null) {
                     scoopOfJamItem.SetScoopOfJamAttribute(outputSlot.Itemstack, jamAttr);
                 }
+                // Allows missing secondFruitCode attribute, for crafting in handbook, which hates any pieable food with attributes (causes CtD)
 
                 // TODO: calc from scoop per jam (unable because we can't refer to ingredients on server side) 
                 var quantity = 1;
@@ -183,4 +186,29 @@ public class ItemJamBread : Item {
         }
     }
 
+    /// <summary>
+    /// Returns new stack of jam bread suitable for registering/referring for handbook (mainly removes ignored attributes)
+    /// </summary>
+    /// <param name="origItemStack"></param>
+    /// <returns></returns>
+    public static ItemStack GetItemStackForHandbook(ItemStack origItemStack) {
+        var rtnStack = origItemStack.Clone();
+        rtnStack.Attributes.RemoveAttribute("secondFruitCode");
+        return rtnStack;
+    }
+
+    public override List<ItemStack>? GetHandBookStacks(ICoreClientAPI capi) {
+        if (!HandbookUtil.IsIncludedInHandBookGeneral(this)) return null;
+        var baseStacks = base.GetHandBookStacks(capi);
+        var handBookStacks = baseStacks
+            .Select(GetItemStackForHandbook)
+            .ToList();
+        return handBookStacks;
+    }
+
+    public string HandbookPageCodeForStack(IWorldAccessor world, ItemStack stack) {
+        var stackForPage = GetItemStackForHandbook(stack);
+        var code = GuiHandbookItemStackPage.PageCodeForStack(stackForPage);
+        return code;
+    }
 }

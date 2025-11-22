@@ -1,6 +1,7 @@
 ﻿using ScoopOfJamMod.Util;
 using System.Collections.Generic;
 using System.Linq;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
@@ -51,6 +52,17 @@ public class ItemScoopOfJam : Item {
     public void SetScoopOfJamAttribute(ItemStack stack, ScoopOfJamAttribute attr) {
         //stack.Attributes.SetFloat("secondFruitNutrition", attr.secondFruitNutrition);
         attr.ToTreeAttribute(stack.Attributes);
+    }
+
+    public override List<ItemStack>? GetHandBookStacks(ICoreClientAPI capi) {
+        if (!HandbookUtil.IsIncludedInHandBookGeneral(this)) return null;
+
+        // Stacks with Attribute causes crash
+        var stacks = new List<ItemStack> {
+            new ItemStack(this)
+        };
+
+        return stacks;
     }
 
 }
