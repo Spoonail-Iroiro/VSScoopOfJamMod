@@ -74,6 +74,7 @@
     }
   ],
   "attributes": {
+    "handbook": { "groupBy": ["jambread-*"] },
     "displaycaseable": true,
     "shelvable": true
   },

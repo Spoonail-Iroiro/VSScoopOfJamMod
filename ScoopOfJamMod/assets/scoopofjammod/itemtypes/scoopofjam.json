@@ -28,7 +28,8 @@
         "*": "game:block/food/pie/fill-{fruit}"
       },
       "partType": "Filling"
-    }
+    },
+    "handbook": { "groupBy": ["scoopofjam-*"] }
     // "nutritionPropsWhenInMeal": {
     //   "satietyByType": {
     //     "*": 200
