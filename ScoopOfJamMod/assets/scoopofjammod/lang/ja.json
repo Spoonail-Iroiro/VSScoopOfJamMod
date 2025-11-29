@@ -1,6 +1,10 @@
 {
+  "scoopofjammod:item-handbooktitle-scoopofjammod:jamspoon-*": "使い方",
+  "scoopofjammod:item-handbooktext-scoopofjammod:jamspoon-*": "ジャムが入った料理鍋/クロックを<hk>rightmouse</hk>クリックすることで<a href=\"handbooksearch://ひとすくいの\">ひとすくいのジャム</a>を入手できます。1食分につき2すくいのジャムが手に入ります。",
+  "scoopofjammod:item-handbooktitle-scoopofjammod:scoopofjam-*": "入手方法",
+  "scoopofjammod:item-handbooktext-scoopofjammod:scoopofjam-*": "<a href=\"handbooksearch://ジャム用スプーン\">ジャム用スプーン</a>で料理鍋/クロックからジャムをすくうことで入手できます。",
   "item-jamspoon-wood": "ジャム用スプーン",
-  "heldhelp-scoopjam": "すくう (ジャム入り料理ポット/クロックをターゲット中)",
+  "heldhelp-scoopjam": "すくう (ジャム入り料理鍋/クロックをターゲット中)",
   "jam-ingredient-single": "{0}",
   "jam-ingredient-double": "{0}＆{1}",
   "scoopofjam-template": "ひとすくいの{0}ジャム",

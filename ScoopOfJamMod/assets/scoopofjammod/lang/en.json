@@ -1,8 +1,8 @@
 {
   "scoopofjammod:item-handbooktitle-scoopofjammod:jamspoon-*": "Use",
-  "scoopofjammod:item-handbooktext-scoopofjammod:jamspoon-*": "<hk>rightmouse</hk> click on a cooking pot/crock with jam to obtain <a href=\"handbooksearch://scoop of\">scoop of jam</a>.",
-  "scoopofjammod:item-handbooktitle-scoopofjammod:scoopofjam-*": "How to Get",
-  "scoopofjammod:item-handbooktext-scoopofjammod:scoopofjam-*": "Scoop jam from a cooking pot/crock with <a href=\"handbooksearch://jam spoon\">jam spoon</a>.",
+  "scoopofjammod:item-handbooktext-scoopofjammod:jamspoon-*": "<hk>rightmouse</hk> click on a jam-filled cooking pot/crock to obtain <a href=\"handbooksearch://scoop of\">scoops of jam</a>. Each serving yields 2 scoops of jam.",
+  "scoopofjammod:item-handbooktitle-scoopofjammod:scoopofjam-*": "Obtaining",
+  "scoopofjammod:item-handbooktext-scoopofjammod:scoopofjam-*": "Use a <a href=\"handbooksearch://jam spoon\">jam spoon</a> to scoop jam from a cooking pot or crock.",
   "item-jamspoon-wood": "Jam spoon",
   "heldhelp-scoopjam": "Scoop (while targeting jam pot/crock)",
   "jam-ingredient-single": "{0}",
