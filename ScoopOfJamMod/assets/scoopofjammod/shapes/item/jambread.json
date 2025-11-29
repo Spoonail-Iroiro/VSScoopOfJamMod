@@ -87,16 +87,16 @@
 		},
 		{
 			"name": "jamRightDrip1",
-			"from": [ 9.76, 0.5, 8.2 ],
+			"from": [ 9.76, 0.75, 8.7 ],
 			"to": [ 9.86, 1.5, 9.2 ],
-			"rotationOrigin": [ 9.76, 0.5, 8.2 ],
+			"rotationOrigin": [ 9.76, 0.75, 8.7 ],
 			"faces": {
-				"north": { "texture": "#jam", "uv": [ 0.0, 0.0, 0.5, 1.0 ] },
-				"east": { "texture": "#jam", "uv": [ 5.0, 0.0, 6.0, 1.0 ] },
-				"south": { "texture": "#jam", "uv": [ 0.0, 0.0, 0.5, 1.0 ] },
-				"west": { "texture": "#jam", "uv": [ 4.5, 0.0, 5.5, 1.0 ] },
-				"up": { "texture": "#jam", "uv": [ 0.0, 1.0, 0.5, 2.0 ] },
-				"down": { "texture": "#jam", "uv": [ 0.0, 1.0, 0.5, 2.0 ] }
+				"north": { "texture": "#jam", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"east": { "texture": "#jam", "uv": [ 5.0, 0.0, 5.5, 0.5 ] },
+				"south": { "texture": "#jam", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"west": { "texture": "#jam", "uv": [ 4.5, 0.0, 5.0, 0.5 ] },
+				"up": { "texture": "#jam", "uv": [ 0.0, 1.0, 0.5, 1.5 ] },
+				"down": { "texture": "#jam", "uv": [ 0.0, 1.0, 0.5, 1.5 ] }
 			}
 		},
 		{
@@ -115,16 +115,30 @@
 		},
 		{
 			"name": "jamRightDrip2",
-			"from": [ 9.76, 0.0, 8.2 ],
+			"from": [ 9.76, 0.25, 8.2 ],
 			"to": [ 9.86, 1.5, 8.7 ],
-			"rotationOrigin": [ 9.76, 0.0, 8.2 ],
+			"rotationOrigin": [ 9.76, 0.25, 8.2 ],
 			"faces": {
-				"north": { "texture": "#jam", "uv": [ 0.0, 0.0, 0.5, 1.5 ] },
-				"east": { "texture": "#jam", "uv": [ 5.0, 0.0, 5.5, 1.5 ] },
-				"south": { "texture": "#jam", "uv": [ 0.0, 0.0, 0.5, 1.5 ] },
-				"west": { "texture": "#jam", "uv": [ 4.5, 0.0, 5.0, 1.5 ] },
+				"north": { "texture": "#jam", "uv": [ 0.0, 0.0, 0.5, 1.0 ] },
+				"east": { "texture": "#jam", "uv": [ 5.0, 0.0, 5.5, 1.0 ] },
+				"south": { "texture": "#jam", "uv": [ 0.0, 0.0, 0.5, 1.0 ] },
+				"west": { "texture": "#jam", "uv": [ 4.5, 0.0, 5.0, 1.0 ] },
 				"up": { "texture": "#jam", "uv": [ 0.0, 1.0, 0.5, 1.5 ] },
 				"down": { "texture": "#jam", "uv": [ 0.0, 1.0, 0.5, 1.5 ] }
+			}
+		},
+		{
+			"name": "jamRightDrip3",
+			"from": [ 9.76, 0.75, 6.7 ],
+			"to": [ 9.86, 1.5, 7.7 ],
+			"rotationOrigin": [ 9.76, 0.75, 6.7 ],
+			"faces": {
+				"north": { "texture": "#jam", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"east": { "texture": "#jam", "uv": [ 5.0, 0.0, 6.0, 0.5 ] },
+				"south": { "texture": "#jam", "uv": [ 0.0, 0.0, 0.5, 0.5 ] },
+				"west": { "texture": "#jam", "uv": [ 4.5, 0.0, 5.5, 0.5 ] },
+				"up": { "texture": "#jam", "uv": [ 0.0, 1.0, 0.5, 2.0 ] },
+				"down": { "texture": "#jam", "uv": [ 0.0, 1.0, 0.5, 2.0 ] }
 			}
 		}
 	]}
