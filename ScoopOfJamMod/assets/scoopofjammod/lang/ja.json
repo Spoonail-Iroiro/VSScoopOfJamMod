@@ -1,5 +1,6 @@
 {
   "item-jamspoon-wood": "ジャム用スプーン",
+  "heldhelp-scoopjam": "すくう (ジャム入り料理ポット/クロックをターゲット中)",
   "jam-ingredient-single": "{0}",
   "jam-ingredient-double": "{0}＆{1}",
   "scoopofjam-template": "ひとすくいの{0}ジャム",
