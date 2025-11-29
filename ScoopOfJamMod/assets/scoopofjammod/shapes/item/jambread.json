@@ -10,8 +10,8 @@
 		"jam": [16,16]
 	},
 	"textures": {
-		"jam": "block/food/pie/fill-pear",
-		"bread": "item/food/grain/speltbread"
+	//	"jam": "block/food/pie/fill-pear",
+	//	"bread": "item/food/grain/speltbread"
 	},
 	"elements": [
 		{

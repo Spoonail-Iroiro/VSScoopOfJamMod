@@ -1,4 +1,5 @@
 ﻿using ScoopOfJamMod.Core;
+using ScoopOfJamMod.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,16 @@ public class ItemJamSpoon : Item {
         JamItemizer.IsJamCheckStrict = mod.Config.isJamCheckStrict;
         configLoaded = true;
         return true;
+    }
+
+    public override WorldInteraction[] GetHeldInteractionHelp(ItemSlot inSlot) {
+        WorldInteraction[] newHelps = [
+            new WorldInteraction() {
+                ActionLangCode = TrUtil.LK("heldhelp-scoopjam"),
+                MouseButton = EnumMouseButton.Right
+            }
+        ];
+        return newHelps;
     }
 
     public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling) {
