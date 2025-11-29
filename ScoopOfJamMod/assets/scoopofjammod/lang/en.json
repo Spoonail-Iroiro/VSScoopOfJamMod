@@ -16,6 +16,7 @@
   "jambread-amaranth-perfect-template": "Amaranth bread with {0} jam",
   "jambread-sunflower-perfect-template": "Sunflower bread with {0} jam",
   "pineapple-in-jam-name-cased": "Pineapple",
+  "note-jambread-fruit-nutrition": "(+ Fruit nutrition from jam)",
   "game:ingameerror-scoopofjammod-jamcheckfatal": "{0}",
   "game:ingameerror-scoopofjammod-jamcheckstrictfailed": "This jam's Inredients are strange, so currently can't be scooped. {0}{1}",
   "game:ingameerror-scoopofjammod-jamcheckdifferentfruitnutritions": "Two fruits in jam must have equal nutrition (e.g. red currant and pomegranate). {0}{1}",

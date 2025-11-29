@@ -16,6 +16,7 @@
   "jambread-amaranth-perfect-template": "アマランサスの{0}ジャムパン",
   "jambread-sunflower-perfect-template": "ヒマワリの{0}ジャムパン",
   "pineapple-in-jam-name-cased": "パイナップル",
+  "note-jambread-fruit-nutrition": "（＋ジャムの果物栄養分）",
   "game:ingameerror-scoopofjammod-jamcheckfatal": "{0}",
   "game:ingameerror-scoopofjammod-jamcheckstrictfailed": "材料が正しくないため、ジャムをすくうことができません。. {0}{1}",
   "game:ingameerror-scoopofjammod-jamcheckdifferentfruitnutritions": "ジャム中の2種のフルーツは同じ栄養価である必要があります (例：赤フサスグリとザクロ)。 {0}{1}",

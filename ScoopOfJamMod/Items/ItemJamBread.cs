@@ -66,6 +66,7 @@ public class ItemJamBread : Item, IHandBookPageCodeProvider {
 
         if (inSlot.Itemstack == null) return;
 
+        // Split to lines
         var lines = dsc
                 .ToString()
                 .TrimEnd()
@@ -130,7 +131,8 @@ public class ItemJamBread : Item, IHandBookPageCodeProvider {
         }
 
         if (noExtraNutrition) {
-            sb.AppendLine($"Also contains fruit nutrition from jam! (not shown in handbook)");
+            // No extra nutrition info found (such as in handbook recipe output), but provides note anyway
+            sb.AppendLine(Lang.Get(TrUtil.LK("note-jambread-fruit-nutrition")));
         }
 
         return sb.ToString().TrimEnd();
