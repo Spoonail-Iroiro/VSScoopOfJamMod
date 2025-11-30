@@ -1,6 +1,6 @@
 {
   "scoopofjammod:item-handbooktitle-scoopofjammod:jamspoon-*": "Use",
-  "scoopofjammod:item-handbooktext-scoopofjammod:jamspoon-*": "<hk>rightmouse</hk> click on a jam-filled cooking pot/crock to obtain <a href=\"handbooksearch://scoop of\">scoops of jam</a>. Each serving yields 2 scoops of jam.",
+  "scoopofjammod:item-handbooktext-scoopofjammod:jamspoon-*": "<hk>rightmouse</hk> click on a jam-filled cooking pot/crock to obtain <a href=\"handbooksearch://scoop of\">scoops of jam</a>. Each serving yields 2 scoops of jam.<br /><br />Some jam can't be scooped due to technical limitations, but in certain cases you can allow scooping anyway with a command. See this mod's ModDB page for more details.",
   "scoopofjammod:item-handbooktitle-scoopofjammod:scoopofjam-*": "Obtaining",
   "scoopofjammod:item-handbooktext-scoopofjammod:scoopofjam-*": "Use a <a href=\"handbooksearch://jam spoon\">jam spoon</a> to scoop jam from a cooking pot or crock.",
   "item-jamspoon-wood": "Jam spoon",
@@ -18,9 +18,9 @@
   "pineapple-in-jam-name-cased": "Pineapple",
   "note-jambread-fruit-nutrition": "(+ Fruit nutrition from jam)",
   "game:ingameerror-scoopofjammod-jamcheckfatal": "{0}",
-  "game:ingameerror-scoopofjammod-jamcheckstrictfailed": "This jam's Inredients are strange, so currently can't be scooped. {0}{1}",
+  "game:ingameerror-scoopofjammod-jamcheckstrictfailed": "This jam's ingredients are strange, so can't be scooped. {0}{1}",
   "game:ingameerror-scoopofjammod-jamcheckdifferentfruitnutritions": "Two fruits in jam must have equal nutrition (e.g. red currant and pomegranate). {0}{1}",
-  "strict-jam-check-see-this": "See `.soj sjchelp` for more details. ",
+  "strict-jam-check-see-this": "See the 'Jam spoon' handbook page for more details.",
 
   "pie-single-scoopofjammod:scoopofjam-blueberry-equal-raw": "Blueberry jam pie (raw)",
   "pie-single-scoopofjammod:scoopofjam-cranberry-equal-raw": "Cranberry jam pie (raw)",
