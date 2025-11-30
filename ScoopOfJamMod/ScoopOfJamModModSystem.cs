@@ -120,31 +120,6 @@ namespace ScoopOfJamMod {
             capi.Network
                 .GetChannel(NetworkChannelName)
                 .SetMessageHandler<ScoopOfJamModConfig>(OnReceivedConfig);
-
-            var rootCommand = api.ChatCommands
-                .Get("soj");
-
-            var subCommand1 = rootCommand
-                .BeginSubCommand("sjchelp")
-                .RequiresPrivilege(Privilege.chat)
-                .HandleWith(args => {
-                    var texts = @"
-Most vanilla jams can be scooped, but only if the nutrition of two fruits are equal (e.g. Red currant-Pomegranate jam).
-A valid jam must also contain exactly two fruits and two honeys.
-Though exception should not occur in vanilla, some mods might allow jams that doesn't meet the requirement.
-
-If either of these conditions is not met, the jam cannot be scooped by default.  
-However, you can disable strict checks with `/soj strict-jam-check 0` to allow scooping anyway.  
-Note that this may cause nutrition inconsistencies (e.g. gaining two 200-nutrition scoops from a 320-nutrition jam).  
-Use this option only if you accept these inconsistencies.
-`servercontrol` privilege is required to run this command.
-
-Cases outside the two above, such as broken nutrition info or modded fruit jam, are just not supported.
-They can't be scooped even if you run the command.
-";
-                    texts = texts.Trim();
-                    return TextCommandResult.Success(texts);
-                });
         }
 
         protected void Event_PlayerJoin(IServerPlayer player) {

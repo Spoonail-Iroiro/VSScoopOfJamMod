@@ -1,6 +1,6 @@
 {
   "scoopofjammod:item-handbooktitle-scoopofjammod:jamspoon-*": "使い方",
-  "scoopofjammod:item-handbooktext-scoopofjammod:jamspoon-*": "ジャムが入った料理鍋/クロックを<hk>rightmouse</hk>クリックすることで<a href=\"handbooksearch://ひとすくいの\">ひとすくいのジャム</a>を入手できます。1食分につき2すくいのジャムが手に入ります。",
+  "scoopofjammod:item-handbooktext-scoopofjammod:jamspoon-*": "ジャムが入った料理鍋/クロックを<hk>rightmouse</hk>クリックすることで<a href=\"handbooksearch://ひとすくいの\">ひとすくいのジャム</a>を入手できます。1食分につき2すくいのジャムが手に入ります。<br /><br />技術的制約により、一部のジャムはすくうことが出来ないことがありますが、コマンドで強制的にすくえるようにできるケースもあります。詳細はModDBページをご確認ください。",
   "scoopofjammod:item-handbooktitle-scoopofjammod:scoopofjam-*": "入手方法",
   "scoopofjammod:item-handbooktext-scoopofjammod:scoopofjam-*": "<a href=\"handbooksearch://ジャム用スプーン\">ジャム用スプーン</a>で料理鍋/クロックからジャムをすくうことで入手できます。",
   "item-jamspoon-wood": "ジャム用スプーン",
@@ -20,7 +20,7 @@
   "game:ingameerror-scoopofjammod-jamcheckfatal": "{0}",
   "game:ingameerror-scoopofjammod-jamcheckstrictfailed": "材料が正しくないため、ジャムをすくうことができません。. {0}{1}",
   "game:ingameerror-scoopofjammod-jamcheckdifferentfruitnutritions": "ジャム中の2種のフルーツは同じ栄養価である必要があります (例：赤フサスグリとザクロ)。 {0}{1}",
-  "strict-jam-check-see-this": "詳細は `.soj sjchelp` コマンドを参照してください。",
+  "strict-jam-check-see-this": "詳細はハンドブックのジャム用スプーンのページをを参照してください。",
 
   "pie-single-scoopofjammod:scoopofjam-blueberry-equal-raw": "ブルーベリージャムのパイ（生）",
   "pie-single-scoopofjammod:scoopofjam-cranberry-equal-raw": "クランベリージャムのパイ（生）",
