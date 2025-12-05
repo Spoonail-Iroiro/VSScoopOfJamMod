@@ -29,7 +29,19 @@
       },
       "partType": "Filling"
     },
-    "handbook": { "groupBy": ["scoopofjam-*"] }
+    "handbook": { "groupBy": ["scoopofjam-*"] },
+    "danacancook:whenOnSandwich": {
+      "shape": {
+        // compatibility/ directory didn't work for some reason
+        "base": "scoopofjammod:item/danacancook/ingredient-scoopofjam"
+      },
+      "textures": {
+        "all": { "base": "game:block/food/pie/fill-{fruit}" }
+      },
+      "size": 0.0625,
+      "rotate": true,
+      "copyLastRotation": true
+    }
     // "nutritionPropsWhenInMeal": {
     //   "satietyByType": {
     //     "*": 200
