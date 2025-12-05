@@ -38,9 +38,9 @@
       "textures": {
         "all": { "base": "game:block/food/pie/fill-{fruit}" }
       },
-      "size": 0.0625,
+      "size": 0.03125, // 0.5/16
       "rotate": true,
-      "copyLastRotation": true
+      "rotation": { "avg": 1, "var": 0.025 }
     }
     // "nutritionPropsWhenInMeal": {
     //   "satietyByType": {
