@@ -36,7 +36,13 @@
         "base": "scoopofjammod:item/danacancook/ingredient-scoopofjam"
       },
       "textures": {
-        "all": { "base": "game:block/food/pie/fill-{fruit}" }
+        "all": {
+          "baseByType": {
+            "*pineapple-*": "game:block/food/pie/fill-pineapple",
+            "*apple-*": "game:block/food/pie/fill-apple",
+            "*": "game:block/food/pie/fill-{fruit}"
+          }
+        }
       },
       "size": 0.03125, // 0.5/16
       "rotate": true,
