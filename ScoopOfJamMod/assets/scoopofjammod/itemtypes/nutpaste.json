@@ -1,0 +1,144 @@
+{
+  "code": "nutpaste",
+  // "class": "scoopofjammod.ItemScoopOfJam",
+  "maxstacksize": 32,
+  "variantgroups": [
+    {
+      "code": "type",
+      "states": ["peanutbutter"]
+    }
+  ],
+  "shape": { "base": "item/nutpaste" },
+  "textures": {
+    "jam": {
+      "baseByType": {
+        "*": "block/food/pie/fill-peanutbutter"
+      }
+    }
+  },
+  "behaviors": [],
+  "attributes": {
+    "inPieProperties": {
+      "textureByType": {
+        "*": "block/food/pie/fill-peanutbutter"
+      },
+      "partType": "Filling"
+    },
+    "handbook": { "groupBy": ["nutpaste-*"] },
+    "danacancook:whenOnSandwich": {
+      "shape": {
+        // compatibility/ directory didn't work for some reason
+        "base": "scoopofjammod:item/danacancook/ingredient-scoopofjam"
+      },
+      "textures": {
+        "all": {
+          "baseByType": {
+            "*": "scoopofjammod:block/food/pie/fill-peanutbutter"
+          }
+        }
+      },
+      "size": 0.03125, // 0.5/16
+      "rotate": true,
+      "rotation": { "avg": 1, "var": 0.025 }
+    }
+    // "nutritionPropsWhenInMeal": {
+    //   "satietyByType": {
+    //     "*": 200
+    //   },
+    //   "foodcategory": "Fruit"
+    // }
+  },
+  "creativeinventoryStacks": [
+    {
+      "tabs": ["general", "items"],
+      "stacks": [
+        {
+          "type": "Item",
+          "code": "scoopofjammod:nutpaste-peanutbutter"
+        }
+      ]
+    }
+  ],
+  "nutritionProps": {
+    "satietyByType": {
+      "*": 160
+    },
+    "foodCategory": "Protein"
+  },
+  "transitionableProps": [
+    {
+      "type": "Perish",
+      "freshHours": { "avg": 540 },
+      "transitionHours": { "avg": 90 },
+      "transitionRatio": 1,
+      "transitionedStack": {
+        "type": "item",
+        "code": "game:rot"
+      }
+    }
+  ],
+  "materialDensity": 600,
+  "guiTransform": {
+    "translation": { "x": 3, "y": -1, "z": 0 },
+    "rotation": { "x": 130, "y": -138, "z": -2 },
+    "origin": { "x": 0.48, "y": 0.09, "z": 0.5 },
+    "scaleXyz": { "x": -3.63, "y": 3.63, "z": 3.63 }
+  },
+  "fpHandTransform": {
+    "translation": {
+      "x": 0.0468,
+      "y": -0.1,
+      "z": 0
+    },
+    "rotation": {
+      "x": 6,
+      "y": 49,
+      "z": 20
+    }
+  },
+  "tpHandTransform": {
+    "translation": {
+      "x": -2.08,
+      "y": -1.24,
+      "z": -1.22
+    },
+    "rotation": {
+      "x": -31,
+      "y": 11,
+      "z": -98
+    },
+    "scale": 0.38
+  },
+  "groundTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0.17,
+      "z": 0
+    },
+    "rotation": {
+      "x": -1,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.17,
+      "z": 0.5
+    },
+    "scale": 5
+  }
+  // TF for model3
+  // "guiTransform": {
+  //   "translation": { "x": 0, "y": 1, "z": 0 },
+  //   "rotation": { "x": 123, "y": -33, "z": -13 },
+  //   "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+  //   "scale": 1.4
+  // },
+  // "fpHandTransform": {
+  //   "translation": { "x": 0, "y": 0, "z": 0 },
+  //   "rotation": { "x": 25, "y": 157, "z": -5 }
+  // },
+  // "tpHandTransform": {
+  //   "translation": { "x": -1.5, "y": -1, "z": -1.4 }
+  // }
+}
