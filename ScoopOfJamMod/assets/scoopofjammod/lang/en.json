@@ -96,5 +96,15 @@
   "pie-single-scoopofjammod:scoopofjam-pineapple-equal-charred": "Pineapple jam pie (charred)",
   "pie-single-scoopofjammod:scoopofjam-pomegranate-equal-charred": "Pomegranate jam pie (charred)",
   "pie-single-scoopofjammod:scoopofjam-lychee-equal-charred": "Lychee jam pie (charred)",
-  "pie-single-scoopofjammod:scoopofjam-breadfruit-equal-charred": "Breadfruit jam pie (charred)"
+  "pie-single-scoopofjammod:scoopofjam-breadfruit-equal-charred": "Breadfruit jam pie (charred)",
+
+  "item-nutpaste-peanutbutter": "Peanut butter",
+
+  "pbandj-spelt-perfect-template": "PB&J (Spelt bread, {0} jam)",
+  "pbandj-rye-perfect-template": "PB&J (Rye bread, {0} jam)",
+  "pbandj-flax-perfect-template": "PB&J (Flax bread, {0} jam)",
+  "pbandj-rice-perfect-template": "PB&J (Rice bread, {0} jam)",
+  "pbandj-cassava-perfect-template": "PB&J (Cassava bread, {0} jam)",
+  "pbandj-amaranth-perfect-template": "PB&J (Amaranth bread, {0} jam)",
+  "pbandj-sunflower-perfect-template": "PB&J (Sunflower bread, {0} jam)"
 }

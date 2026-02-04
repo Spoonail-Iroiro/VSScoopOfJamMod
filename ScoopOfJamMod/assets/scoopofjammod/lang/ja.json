@@ -96,5 +96,15 @@
   "pie-single-scoopofjammod:scoopofjam-pineapple-equal-charred": "パイナップルジャムのパイ（黒焦げ）",
   "pie-single-scoopofjammod:scoopofjam-pomegranate-equal-charred": "ザクロジャムのパイ（黒焦げ）",
   "pie-single-scoopofjammod:scoopofjam-lychee-equal-charred": "ライチジャムのパイ（黒焦げ）",
-  "pie-single-scoopofjammod:scoopofjam-breadfruit-equal-charred": "パンノキジャムのパイ（黒焦げ）"
+  "pie-single-scoopofjammod:scoopofjam-breadfruit-equal-charred": "パンノキジャムのパイ（黒焦げ）",
+
+  "item-nutpaste-peanutbutter": "ピーナッツバター",
+
+  "pbandj-spelt-perfect-template": "PB&J (スペルト小麦パン, {0}ジャム)",
+  "pbandj-rye-perfect-template": "PB&J (ライ麦パン, {0}ジャム)",
+  "pbandj-flax-perfect-template": "PB&J (亜麻パン, {0}ジャム)",
+  "pbandj-rice-perfect-template": "PB&J (米粉パン, {0}ジャム)",
+  "pbandj-cassava-perfect-template": "PB&J (キャッサバパン, {0}ジャム)",
+  "pbandj-amaranth-perfect-template": "PB&J (アマランサスパン, {0}ジャム)",
+  "pbandj-sunflower-perfect-template": "PB&J (ヒマワリパン, {0}ジャム)"
 }

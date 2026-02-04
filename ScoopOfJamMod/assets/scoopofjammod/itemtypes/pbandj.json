@@ -1,6 +1,6 @@
 {
   "code": "pbandj",
-  // "class": "scoopofjammod.ItemJamBread",
+  "class": "scoopofjammod.ItemPBAndJ",
   "maxstacksizeByType": {
     "*": 32
   },

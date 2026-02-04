@@ -34,6 +34,7 @@ namespace ScoopOfJamMod {
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemJamSpoon), typeof(ItemJamSpoon));
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemJamBread), typeof(ItemJamBread));
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemScoopOfJam), typeof(ItemScoopOfJam));
+            api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemPBAndJ), typeof(ItemPBAndJ));
 
             api.RegisterCollectibleBehaviorClass(Mod.Info.ModID + ".ExtraSatiety", typeof(BehaviorExtraSatiety));
 
