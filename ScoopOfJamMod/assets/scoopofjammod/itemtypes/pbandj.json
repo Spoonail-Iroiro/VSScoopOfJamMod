@@ -1,0 +1,127 @@
+{
+  "code": "pbandj",
+  // "class": "scoopofjammod.ItemJamBread",
+  "maxstacksizeByType": {
+    "*": 32
+  },
+  "variantgroups": [
+    {
+      "code": "type",
+      "states": [
+        "spelt",
+        "rye",
+        "flax",
+        "rice",
+        "cassava",
+        "amaranth",
+        "sunflower"
+      ]
+    },
+    { "code": "state", "states": ["perfect"] },
+    { "loadFromProperties": "block/fruit" },
+    { "code": "nutpaste", "states": ["peanutbutter"] }
+  ],
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "collisionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 1,
+          "y2": 0.125,
+          "z2": 1
+        }
+      }
+    }
+  ],
+  "shape": { "base": "item/pbandj" },
+  "textures": {
+    "bread": { "base": "game:item/food/grain/{type}bread" },
+    "jamByType": {
+      "*-pineapple-*": {
+        "base": "game:block/food/pie/fill-pineapple"
+      },
+      "*apple-*": {
+        "base": "game:block/food/pie/fill-apple"
+      },
+      "*": {
+        "base": "game:block/food/pie/fill-{fruit}"
+      }
+    },
+    "peanutbutter": { "base": "block/food/pie/fill-peanutbutter" }
+  },
+  "creativeinventoryStacks": [
+    {
+      "tabs": ["general", "items"],
+      "stacks": [
+        {
+          "type": "Item",
+          "code": "scoopofjammod:pbandj-{type}-perfect-{fruit}-{nutpaste}",
+          "attributes": {
+            "secondFruitCode": "game:fruit-{fruit}",
+            "extraNutrition": {
+              "FruitByType": {
+                "@.*-(saguaro|cranberry)": 170.0,
+                "@.*-(cherry|lychee)": 140.0,
+                "*-breadfruit": 330.0,
+                "*": 200.0
+              },
+              "Protein": 160.0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "attributes": {
+    "handbook": { "groupBy": ["pbandj-*"] },
+    "displaycaseable": true,
+    "shelvable": true
+  },
+  "nutritionPropsByType": {
+    "*-flax-*": { "saturation": 160, "foodcategory": "Grain" },
+
+    "*-rice-*": { "saturation": 330, "foodcategory": "Grain" },
+
+    "*": { "saturation": 300, "foodcategory": "Grain" }
+  },
+  "transitionablePropsByType": {
+    "*-perfect-*": [
+      {
+        "type": "Perish",
+        "freshHours": { "avg": 192 },
+        "transitionHours": { "avg": 36 },
+        "transitionedStack": { "type": "item", "code": "game:rot" },
+        "transitionRatio": 1
+      }
+    ]
+  },
+  "materialDensity": 200,
+  "guiTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": -30, "y": 26, "z": 180 },
+    "origin": { "x": 0.52, "y": 0.07, "z": 0.5 },
+    "scale": 4.9
+  },
+  "groundTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 0, "y": 0, "z": 1 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 4.5
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.54, "y": -0.16, "z": -0.4 },
+    "rotation": { "x": 88, "y": -85, "z": 2 },
+    "origin": { "x": 0.5, "y": 0.13, "z": 0.5 },
+    "scale": 1
+  },
+  "fpHandTransform": {
+    "translation": { "x": 0, "y": 0.24, "z": 0.3 },
+    "rotation": { "x": 104, "y": 0, "z": 71 },
+    "origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+    "scale": 2.5
+  }
+}
