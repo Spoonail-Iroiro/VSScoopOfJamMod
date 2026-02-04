@@ -2,9 +2,9 @@
   "type": "code",
   "modid": "scoopofjammod",
   "name": "Scoop of Jam",
-  "authors": [ "Spoonail" ],
+  "authors": ["Spoonail"],
   "description": "Scoop jam with a spoon to make jam sandwiches and jam pies!",
-  "version": "0.2.0-rc.1",
+  "version": "0.2.0-rc.2",
   "dependencies": {
     "game": "1.21.0"
   }
