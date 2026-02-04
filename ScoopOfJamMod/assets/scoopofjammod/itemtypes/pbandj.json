@@ -35,6 +35,9 @@
           "z2": 1
         }
       }
+    },
+    {
+      "name": "scoopofjammod.ExtraSatiety"
     }
   ],
   "shape": { "base": "item/pbandj" },
