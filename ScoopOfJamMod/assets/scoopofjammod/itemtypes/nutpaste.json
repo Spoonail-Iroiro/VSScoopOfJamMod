@@ -28,7 +28,7 @@
     "danacancook:whenOnSandwich": {
       "shape": {
         // compatibility/ directory didn't work for some reason
-        "base": "scoopofjammod:item/danacancook/ingredient-scoopofjam"
+        "base": "scoopofjammod:item/danacancook/ingredient-nutpaste"
       },
       "textures": {
         "all": {
