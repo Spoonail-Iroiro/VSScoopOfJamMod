@@ -106,5 +106,10 @@
   "pbandj-rice-perfect-template": "PB&J (Rice bread, {0} jam)",
   "pbandj-cassava-perfect-template": "PB&J (Cassava bread, {0} jam)",
   "pbandj-amaranth-perfect-template": "PB&J (Amaranth bread, {0} jam)",
-  "pbandj-sunflower-perfect-template": "PB&J (Sunflower bread, {0} jam)"
+  "pbandj-sunflower-perfect-template": "PB&J (Sunflower bread, {0} jam)",
+
+  "pie-single-scoopofjammod:nutpaste-peanutbutter-raw": "Peanut butter pie (raw)",
+  "pie-single-scoopofjammod:nutpaste-peanutbutter-partbaked": "Peanut butter pie (part-baked)",
+  "pie-single-scoopofjammod:nutpaste-peanutbutter-perfect": "Peanut butter pie",
+  "pie-single-scoopofjammod:nutpaste-peanutbutter-charred": "Peanut butter pie (charred)"
 }
