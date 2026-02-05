@@ -1,6 +1,6 @@
 {
   "code": "jambread",
-  "class": "scoopofjammod.ItemJamBread",
+  "class": "scoopofjammod.ItemJamBreadAttributeVariants",
   "behaviors": [
     {
       "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes",
@@ -44,7 +44,15 @@
         "attributeVariants": [
           {
             "code": "type",
-            "states": ["spelt", "flax"]
+            "states": [
+              "spelt",
+              "rye",
+              "flax",
+              "rice",
+              "cassava",
+              "amaranth",
+              "sunflower"
+            ]
           },
           {
             "loadFromProperties": "block/fruit"
@@ -54,16 +62,6 @@
     }
   ],
   "attributes": {
-    "attributeVariants": [
-      {
-        "code": "type",
-        "states": ["spelt", "flax"]
-      },
-      {
-        "code": "fruit",
-        "states": ["redapple", "pineapple", "cranberry"]
-      }
-    ],
     "handbook": { "groupBy": ["jambread-*"] },
     "displaycaseable": true,
     "shelvable": true
@@ -73,78 +71,13 @@
   "textures": {
     "bread": { "base": "game:item/food/grain/speltbread" },
     "jam": { "base": "game:block/food/pie/fill-pineapple" }
-    // "*-pineapple": {
-    //   "bread": { "base": "game:item/food/grain/{type}bread" },
-    //   "jam": { "base": "game:block/food/pie/fill-pineapple" }
-    // },
-    // "*apple": {
-    //   "bread": { "base": "game:item/food/grain/{type}bread" },
-    //   "jam": { "base": "game:block/food/pie/fill-apple" }
-    // },
-    // "*": {
-    //   "bread": { "base": "game:item/food/grain/{type}bread" },
-    //   "jam": { "base": "game:block/food/pie/fill-{fruit}" }
-    // }
   },
-  // Create in code
-  // "creativeinventoryStacks": [
-  //   {
-  //     "tabs": ["general", "items"],
-  //     "stacks": [
-  //       {
-  //         "type": "Item",
-  //         "code": "scoopofjammod:jambread-{type}-perfect-{fruit}",
-  //         "attributes": {
-  //           "secondFruitCode": "game:fruit-{fruit}",
-  //           "extraNutrition": {
-  //             "FruitByType": {
-  //               "@.*-(saguaro|cranberry)": 170.0,
-  //               "@.*-(cherry|lychee)": 140.0,
-  //               "*-breadfruit": 330.0,
-  //               "*": 200.0
-  //             }
-  //           }
-  //         }
-  //       }
-  //     ]
-  //   }
-  // ],
-  "creativeinventoryStacks": [
-    {
-      "tabs": ["general", "items", "scoopofjam"],
-      "stacks": [
-        {
-          "type": "Item",
-          "code": "scoopofjammod:jambread",
-          "attributes": {
-            "types": {
-              "type": "spelt",
-              "fruit": "redcurrant"
-            },
-            "secondFruitCode": "game:fruit-redcurrant",
-            "extraNutrition": {
-              "FruitByType": {
-                "@.*-(saguaro|cranberry)": 170.0,
-                "@.*-(cherry|lychee)": 140.0,
-                "*-breadfruit": 330.0,
-                "*": 200.0
-              },
-              "Grain": 300.0
-            }
-          }
-        }
-      ]
-    }
-  ],
+  // "creativeinventoryStacks" is created in code
   "nutritionPropsByType": {
-    // "*-flax-*": { "saturation": 160, "foodcategory": "Grain" },
-
-    // "*-rice-*": { "saturation": 330, "foodcategory": "Grain" },
-
     "*": { "saturation": 0, "foodcategory": "Grain" }
   },
   "transitionablePropsByType": {
-    "*-perfect-*": [
+    "*": [
       {
         "type": "Perish",
         "freshHours": { "avg": 192 },

@@ -81,16 +81,6 @@ public class ItemJamBreadAttributeVariants : Item, IHandBookPageCodeProvider {
                 if (jamAttr != null) {
                     scoopOfJamItem.SetScoopOfJamAttribute(outputSlot.Itemstack, jamAttr);
                 }
-                // Allows missing secondFruitCode attribute, for crafting in handbook, which hates any pieable food with attributes (causes CtD)
-
-                //// TODO: calc from scoop per jam (unable because we can't refer to ingredients on server side) 
-                //var quantity = 1;
-
-                //// Set extra nutrition
-                //var extraNut = new Dictionary<EnumFoodCategory, float>();
-                //extraNut[scoopOfJamItem.NutritionProps.FoodCategory] = scoopOfJamItem.NutritionProps.Satiety * quantity;
-                //var extraNutProps = new ExtraNutritionPropsAttribute(extraNut);
-                //extraNutProps.ToTreeAttribute(outputSlot.Itemstack.Attributes);
             }
         }
     }
@@ -122,30 +112,11 @@ public class ItemJamBreadAttributeVariants : Item, IHandBookPageCodeProvider {
     }
 
     protected virtual void AddCreativeInventoryStacks(ICoreAPI api) {
-
         var allVariants = AttributeVariantsHelper.GatherAllVariants(this);
         if (allVariants == null) {
             api.Logger.Warning($"Couldn't load AttributeVariants");
             return;
         }
-
-        //List<JsonItemStack> stacks = new List<JsonItemStack>();
-
-        //foreach (var type in types)
-        //{
-        //    foreach (var material in materials)
-        //    {
-        //        var jstack = new JsonItemStack()
-        //        {
-        //            Code = this.Code,
-        //            Type = EnumItemClass.Block,
-        //            Attributes = new JsonObject(JToken.Parse("{ \"type\": \"" + type + "\", \"material\": \"" + material + "\" }"))
-        //        };
-
-        //        jstack.Resolve(api.World, Code + " type");
-        //        stacks.Add(jstack);
-        //    }
-        //}
 
         var stacks = new List<JsonItemStack>();
 
@@ -157,19 +128,28 @@ public class ItemJamBreadAttributeVariants : Item, IHandBookPageCodeProvider {
           },
           "secondFruitCode": "game:fruit-{fruit}",
           "extraNutrition": {
-            "Fruit": 200.0,
-            "Grain": 300.0
+            "Fruit": {fruitSat},
+            "Grain": {grainSat}
           }
         }
         """;
 
         foreach (var variant in allVariants) {
-            var attrStr = template.Replace("{fruit}", variant["fruit"]).Replace("{grain}", variant["type"]);
+            var fruit = variant["fruit"];
+            var grain = variant["type"];
+
+            var attrStr = template
+                .Replace("{fruit}", variant["fruit"])
+                .Replace("{grain}", variant["type"])
+                .Replace("{fruitSat}", $"{NutritionUtil.VanillaFruitCodeToJamScoopSatiety(fruit!):F1}")
+                .Replace("{grainSat}", $"{NutritionUtil.VanillaGrainCodeToBreadSatiety(grain!):F1}");
+
             var jsonStack = new JsonItemStack() {
                 Code = this.Code,
                 Type = EnumItemClass.Item,
                 Attributes = new JsonObject(JToken.Parse(attrStr))
             };
+            jsonStack.Resolve(api.World, this.Code + " type");
             stacks.Add(jsonStack);
         }
 
