@@ -7,6 +7,9 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Server;
 using ScoopOfJamMod.CollectibleBehaviors;
+using System.Text;
+using ScoopOfJamMod.Util;
+using System.Linq;
 
 namespace ScoopOfJamMod {
     public class ScoopOfJamModModSystem : ModSystem {
@@ -37,6 +40,7 @@ namespace ScoopOfJamMod {
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemPBAndJ), typeof(ItemPBAndJ));
 
             api.RegisterCollectibleBehaviorClass(Mod.Info.ModID + ".ExtraSatiety", typeof(BehaviorExtraSatiety));
+            api.RegisterCollectibleBehaviorClass(Mod.Info.ModID + ".AttributeVariants", typeof(BehaviorAttributeVariants));
 
             api.Network
                 .RegisterChannel(NetworkChannelName)
@@ -75,6 +79,52 @@ namespace ScoopOfJamMod {
                     var enableStr = enable ? "enabled" : "disabled";
                     return TextCommandResult.Success($"{Mod.Info.ModID} debug mode {enableStr}");
                 });
+#if DEBUG
+            var testLoader = rootCommand
+                .BeginSubCommand("attr-variant")
+                .WithArgs(parsers.OptionalWordRange("cmd", ["show", "all"]))
+                .HandleWith(args => {
+                    var stack = args.Caller.Player.InventoryManager?.ActiveHotbarSlot?.Itemstack;
+                    if (stack == null) {
+                        return TextCommandResult.Error($"Needs some item in your hand");
+                    }
+
+                    if (!AttributeVariantsHelper.HasAttributeVariants(stack)) {
+                        return TextCommandResult.Error($"No AttributeVariants");
+                    }
+
+                    var cmdSB = new StringBuilder();
+
+                    var cmd = "show";
+
+                    if (!args.Parsers[0].IsMissing) {
+                        cmd = args.Parsers[0].GetValue().ToString();
+                    }
+
+                    switch (cmd) {
+                        case "show":
+                            var variant = AttributeVariantsHelper.GetVariant(stack);
+
+                            if (variant == null) {
+                                cmdSB.AppendLine("No variant");
+                            }
+                            else {
+                                foreach (var kv in variant) {
+                                    cmdSB.AppendLine($"{kv.Key}: {kv.Value}");
+                                }
+                            }
+                            break;
+                        case "all":
+                            var allVars = AttributeVariantsHelper.GatherAllVariants(stack.Collectible);
+                            foreach (var v in allVars) {
+                                cmdSB.AppendLine(string.Join("-", v.Select(kv => kv.Value)));
+                            }
+                            break;
+                    }
+                    return TextCommandResult.Success(cmdSB.ToString());
+                });
+#endif
+
         }
 
         public override void StartServerSide(ICoreServerAPI api) {

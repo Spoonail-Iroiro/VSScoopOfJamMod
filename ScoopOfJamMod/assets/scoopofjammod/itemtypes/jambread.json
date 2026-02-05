@@ -1,4 +1,5 @@
 {
+  "enabled": true,
   "code": "jambread",
   "class": "scoopofjammod.ItemJamBread",
   "maxstacksizeByType": {
