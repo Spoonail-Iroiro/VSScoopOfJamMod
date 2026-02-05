@@ -8,6 +8,9 @@ namespace ScoopOfJamMod.Items;
 public class ItemPBAndJ : ItemJamBread {
     protected override string TranslationKeyNoNutritionNote => "note-pbandj-missing-nutrition";
 
+    public override void OnLoaded(ICoreAPI api) {
+    }
+
     public override string GetHeldItemName(ItemStack itemStack) {
         var firstFruit = itemStack.Item?.Variant["fruit"];
         var grain = itemStack.Item?.Variant["type"];
@@ -25,6 +28,9 @@ public class ItemPBAndJ : ItemJamBread {
         var breadName = Lang.GetL(langCode, TrUtil.LK($"pbandj-{grain}-perfect-template"), jamIngredientText, nutPasteText);
 
         return breadName;
+    }
+
+    protected override void AddCreativeInventoryStacks(ICoreAPI api) {
     }
 }
 

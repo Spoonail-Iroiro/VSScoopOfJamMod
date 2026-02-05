@@ -12,6 +12,7 @@ using Vintagestory.Common;
 using Vintagestory.ServerMods;
 
 using VariantType = Vintagestory.API.Datastructures.OrderedDictionary<string, string?>;
+using VariantSafeType = Vintagestory.API.Util.RelaxedReadOnlyDictionary<string, string?>;
 
 namespace ScoopOfJamMod.Util;
 
@@ -21,20 +22,21 @@ public static class AttributeVariantsHelper {
         return beh != null;
     }
 
-    public static VariantType? GetVariant(ItemStack stack) {
+    public static VariantSafeType? GetVariant(ItemStack stack) {
         var beh = stack.Collectible.GetBehavior<BehaviorAttributeVariants>();
         if (beh == null) return null;
         if (stack?.Attributes == null) return null;
         var typeAttr = stack.Attributes.GetTreeAttribute("types");
         if (typeAttr == null) return null;
 
-        var rtn = new VariantType();
+        var variant = new VariantType();
         foreach (var group in beh.AttributeVariants!) {
             var value = typeAttr.GetString(group.Code);
-            rtn[group.Code] = value;
+            variant[group.Code] = value;
         }
 
-        return rtn;
+
+        return new VariantSafeType(variant);
     }
 
     public static void SetVariant(ItemStack stack, VariantType variant) {
@@ -52,15 +54,15 @@ public static class AttributeVariantsHelper {
         }
     }
 
-    public static IEnumerable<VariantType> GatherAllVariants(CollectibleObject colobj) {
+    public static IEnumerable<VariantSafeType> GatherAllVariants(CollectibleObject colobj) {
         var beh = colobj.GetBehavior<BehaviorAttributeVariants>();
-        if (beh == null) return Enumerable.Empty<VariantType>();
+        if (beh == null) return Enumerable.Empty<VariantSafeType>();
         var remainingGroups = beh.AttributeVariants!.Select(GatherStates).ToList();
         var currentSelections = new List<Tuple<string, string>>();
         return GatherAllVariantsInternal(remainingGroups, 0, currentSelections);
     }
 
-    private static IEnumerable<VariantType> GatherAllVariantsInternal(List<(string Code, string[] States)> groups, int groupIndex, List<Tuple<string, string>> currentSelections) {
+    private static IEnumerable<VariantSafeType> GatherAllVariantsInternal(List<(string Code, string[] States)> groups, int groupIndex, List<Tuple<string, string>> currentSelections) {
         var group = groups[groupIndex];
 
         foreach (var state in group.States) {
@@ -75,7 +77,7 @@ public static class AttributeVariantsHelper {
                 foreach ((var code, var stateForGroup) in currentSelections) {
                     variant[code] = stateForGroup;
                 }
-                yield return variant;
+                yield return new VariantSafeType(variant);
             }
             currentSelections.RemoveAt(currentSelections.Count - 1);
         }
