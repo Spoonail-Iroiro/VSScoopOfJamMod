@@ -6,6 +6,7 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Server;
+using ScoopOfJamMod.CollectibleBehaviors;
 
 namespace ScoopOfJamMod {
     public class ScoopOfJamModModSystem : ModSystem {
@@ -33,6 +34,9 @@ namespace ScoopOfJamMod {
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemJamSpoon), typeof(ItemJamSpoon));
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemJamBread), typeof(ItemJamBread));
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemScoopOfJam), typeof(ItemScoopOfJam));
+            api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemPBAndJ), typeof(ItemPBAndJ));
+
+            api.RegisterCollectibleBehaviorClass(Mod.Info.ModID + ".ExtraSatiety", typeof(BehaviorExtraSatiety));
 
             api.Network
                 .RegisterChannel(NetworkChannelName)

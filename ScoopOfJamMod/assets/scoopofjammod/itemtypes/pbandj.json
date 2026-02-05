@@ -1,6 +1,6 @@
 {
-  "code": "jambread",
-  "class": "scoopofjammod.ItemJamBread",
+  "code": "pbandj",
+  "class": "scoopofjammod.ItemPBAndJ",
   "maxstacksizeByType": {
     "*": 32
   },
@@ -18,7 +18,8 @@
       ]
     },
     { "code": "state", "states": ["perfect"] },
-    { "loadFromProperties": "block/fruit" }
+    { "loadFromProperties": "block/fruit" },
+    { "code": "nutpaste", "states": ["peanutbutter"] }
   ],
   "behaviors": [
     {
@@ -39,20 +40,21 @@
       "name": "scoopofjammod.ExtraSatiety"
     }
   ],
-  "shape": { "base": "item/jambread" },
-  "texturesbytype": {
-    "*-pineapple": {
-      "bread": { "base": "game:item/food/grain/{type}bread" },
-      "jam": { "base": "game:block/food/pie/fill-pineapple" }
+  "shape": { "base": "item/pbandj" },
+  "textures": {
+    "bread": { "base": "game:item/food/grain/{type}bread" },
+    "jamByType": {
+      "*-pineapple-*": {
+        "base": "game:block/food/pie/fill-pineapple"
+      },
+      "*apple-*": {
+        "base": "game:block/food/pie/fill-apple"
+      },
+      "*": {
+        "base": "game:block/food/pie/fill-{fruit}"
+      }
     },
-    "*apple": {
-      "bread": { "base": "game:item/food/grain/{type}bread" },
-      "jam": { "base": "game:block/food/pie/fill-apple" }
-    },
-    "*": {
-      "bread": { "base": "game:item/food/grain/{type}bread" },
-      "jam": { "base": "game:block/food/pie/fill-{fruit}" }
-    }
+    "peanutbutter": { "base": "block/food/pie/fill-peanutbutter" }
   },
   "creativeinventoryStacks": [
     {
@@ -60,7 +62,7 @@
       "stacks": [
         {
           "type": "Item",
-          "code": "scoopofjammod:jambread-{type}-perfect-{fruit}",
+          "code": "scoopofjammod:pbandj-{type}-perfect-{fruit}-{nutpaste}",
           "attributes": {
             "secondFruitCode": "game:fruit-{fruit}",
             "extraNutrition": {
@@ -69,7 +71,8 @@
                 "@.*-(cherry|lychee)": 140.0,
                 "*-breadfruit": 330.0,
                 "*": 200.0
-              }
+              },
+              "Protein": 160.0
             }
           }
         }
@@ -77,7 +80,7 @@
     }
   ],
   "attributes": {
-    "handbook": { "groupBy": ["jambread-*"] },
+    "handbook": { "groupBy": ["pbandj-*"] },
     "displaycaseable": true,
     "shelvable": true
   },

@@ -1,0 +1,35 @@
+[
+  {
+    "ingredientPattern": "KBJ,__P",
+    "width": 3,
+    "height": 2,
+    "ingredients": {
+      "K": {
+        "type": "item",
+        "code": "game:knife-*",
+        "isTool": true
+      },
+      "B": {
+        "type": "item",
+        "code": "game:bread-*-perfect",
+        "name": "bread"
+      },
+      "J": {
+        "type": "item",
+        "code": "scoopofjam-*-equal",
+        "name": "fruit",
+        "quantity": 1
+      },
+      "P": {
+        "type": "item",
+        "code": "nutpaste-*",
+        "name": "nutpaste",
+        "quantity": 1
+      }
+    },
+    "output": {
+      "type": "item",
+      "code": "pbandj-{bread}-perfect-{fruit}-{nutpaste}"
+    }
+  }
+]
