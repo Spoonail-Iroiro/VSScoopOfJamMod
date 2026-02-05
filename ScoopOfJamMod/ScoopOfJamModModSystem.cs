@@ -117,7 +117,8 @@ namespace ScoopOfJamMod {
                         case "all":
                             var allVars = AttributeVariantsHelper.GatherAllVariants(stack.Collectible);
                             foreach (var v in allVars) {
-                                cmdSB.AppendLine(string.Join("-", v.Select(kv => kv.Value)));
+                                //cmdSB.AppendLine(string.Join("-", v.Select(kv => kv.Value)));
+                                cmdSB.AppendLine(JsonUtil.ToString(v));
                             }
                             break;
                     }

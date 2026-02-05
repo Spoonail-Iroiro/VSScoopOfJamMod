@@ -47,8 +47,7 @@
             "states": ["spelt", "flax"]
           },
           {
-            "code": "fruit",
-            "states": ["redapple", "pineapple", "cranberry"]
+            "loadFromProperties": "block/fruit"
           }
         ]
       }

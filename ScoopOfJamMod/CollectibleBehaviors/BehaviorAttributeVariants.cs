@@ -14,7 +14,6 @@ namespace ScoopOfJamMod.CollectibleBehaviors;
 public class BehaviorAttributeVariants : CollectibleBehavior {
     public RegistryObjectVariantGroup[]? AttributeVariants { get; private set; }
 
-
     public BehaviorAttributeVariants(CollectibleObject collObj) : base(collObj) {
     }
 
@@ -23,12 +22,28 @@ public class BehaviorAttributeVariants : CollectibleBehavior {
 
         AttributeVariants = properties["attributeVariants"].AsObject<RegistryObjectVariantGroup[]>();
 
-        // TODO: load from properties
-
         if (AttributeVariants == null) {
             throw new ArgumentException($"{nameof(BehaviorAttributeVariants)} needs attributeVariants property: {collObj.Code}");
         }
+    }
 
-        Console.WriteLine($"Initializing {nameof(BehaviorAttributeVariants)}: {collObj.Code}");
+    public override void OnLoaded(ICoreAPI api) {
+        base.OnLoaded(api);
+
+        // Resolve loadFromProperties
+        foreach (var group in AttributeVariants!) {
+            if (group.LoadFromProperties != null) {
+                var prop = api.Assets.TryGet(group.LoadFromProperties.WithPathPrefixOnce("worldproperties/").WithPathAppendixOnce(".json"))
+                    .ToObject<StandardWorldProperty>();
+                var newStates = prop.Variants.Select(p => p.Code.Path).ToArray().Append(group.States);
+
+                // if the group has only `loadFromProperties`, code is detemined automatically
+                // Like, for { "loadFromProperties":"block/fruit" }, its code is "fruit"
+                if (group.Code == null) group.Code = prop.Code.Path;
+                group.States = newStates;
+                // Resolved
+                group.LoadFromProperties = null;
+            }
+        }
     }
 }
