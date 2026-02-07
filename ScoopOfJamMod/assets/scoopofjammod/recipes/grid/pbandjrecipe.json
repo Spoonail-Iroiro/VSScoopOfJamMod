@@ -29,7 +29,14 @@
     },
     "output": {
       "type": "item",
-      "code": "pbandj-{bread}-perfect-{fruit}-{nutpaste}"
+      "code": "pbandj",
+      "attributes": {
+        "types": {
+          "type": "{bread}",
+          "fruit": "{fruit}",
+          "nutpaste": "{nutpaste}"
+        }
+      }
     }
   }
 ]
