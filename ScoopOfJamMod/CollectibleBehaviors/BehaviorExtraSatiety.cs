@@ -53,7 +53,7 @@ public class BehaviorExtraSatiety : CollectibleBehavior {
 
             // Skip existing nutrition category in the output item
             // TODO: Clean up? Maybe food with extraNutrition shouldn't have vanilla nutrition
-            if (nutritionProps.FoodCategory == existingNutrition?.FoodCategory) continue;
+            if (nutritionProps.FoodCategory == existingNutrition?.FoodCategory && existingNutrition.Satiety > 0) continue;
             // Set extra nutrition
             if (!extraNut.ContainsKey(nutritionProps.FoodCategory)) extraNut[nutritionProps.FoodCategory] = 0.0f;
             extraNut[nutritionProps.FoodCategory] += nutritionProps.Satiety * quantity;

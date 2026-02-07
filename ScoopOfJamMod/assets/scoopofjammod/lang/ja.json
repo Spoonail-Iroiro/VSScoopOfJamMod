@@ -100,18 +100,21 @@
 
   "item-nutpaste-peanutbutter": "ピーナッツバター",
 
-  "pbandj-spelt-perfect-template": "PB&J (スペルト小麦パン, {0}ジャム)",
-  "pbandj-rye-perfect-template": "PB&J (ライ麦パン, {0}ジャム)",
-  "pbandj-flax-perfect-template": "PB&J (亜麻パン, {0}ジャム)",
-  "pbandj-rice-perfect-template": "PB&J (米粉パン, {0}ジャム)",
-  "pbandj-cassava-perfect-template": "PB&J (キャッサバパン, {0}ジャム)",
-  "pbandj-amaranth-perfect-template": "PB&J (アマランサスパン, {0}ジャム)",
-  "pbandj-sunflower-perfect-template": "PB&J (ヒマワリパン, {0}ジャム)",
+  "pbandj-spelt-perfect-template": "PB&J（スペルト小麦パン, {0}ジャム）",
+  "pbandj-rye-perfect-template": "PB&J（ライ麦パン, {0}ジャム）",
+  "pbandj-flax-perfect-template": "PB&J（亜麻パン, {0}ジャム）",
+  "pbandj-rice-perfect-template": "PB&J（米粉パン, {0}ジャム）",
+  "pbandj-cassava-perfect-template": "PB&J（キャッサバパン, {0}ジャム）",
+  "pbandj-amaranth-perfect-template": "PB&J（アマランサスパン, {0}ジャム）",
+  "pbandj-sunflower-perfect-template": "PB&J（ヒマワリパン, {0}ジャム）",
 
   "pie-single-scoopofjammod:nutpaste-peanutbutter-raw": "ピーナッツバターパイ（生）",
   "pie-single-scoopofjammod:nutpaste-peanutbutter-partbaked": "ピーナッツバターパイ（生焼け）",
   "pie-single-scoopofjammod:nutpaste-peanutbutter-perfect": "ピーナッツバターパイ",
   "pie-single-scoopofjammod:nutpaste-peanutbutter-charred": "ピーナッツバターパイ（黒焦げ）",
 
-  "note-pbandj-missing-nutrition": "(+ 具材からの栄養分)"
+  "note-pbandj-missing-nutrition": "(+ 具材からの栄養分)",
+
+  "item-jambread": "ジャムパン（内容不明）",
+  "item-pbandj": "PB&J（内容不明）"
 }

@@ -1,27 +1,35 @@
 {
   "code": "pbandj",
   "class": "scoopofjammod.ItemPBAndJ",
-  "maxstacksizeByType": {
-    "*": 32
-  },
-  "variantgroups": [
-    {
-      "code": "type",
-      "states": [
-        "spelt",
-        "rye",
-        "flax",
-        "rice",
-        "cassava",
-        "amaranth",
-        "sunflower"
-      ]
-    },
-    { "code": "state", "states": ["perfect"] },
-    { "loadFromProperties": "block/fruit" },
-    { "code": "nutpaste", "states": ["peanutbutter"] }
-  ],
   "behaviors": [
+    {
+      "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes",
+      "properties": {
+        "textures": {
+          "type-*::fruit-pineapple::nutpaste-*": {
+            "bread": { "base": "game:item/food/grain/{type}bread" },
+            "jam": { "base": "game:block/food/pie/fill-pineapple" },
+            "peanutbutter": {
+              "base": "scoopofjammod:block/food/pie/fill-{nutpaste}"
+            }
+          },
+          "type-*::fruit-*apple::nutpaste-*": {
+            "bread": { "base": "game:item/food/grain/{type}bread" },
+            "jam": { "base": "game:block/food/pie/fill-apple" },
+            "peanutbutter": {
+              "base": "scoopofjammod:block/food/pie/fill-{nutpaste}"
+            }
+          },
+          "type-*::fruit-*::nutpaste-*": {
+            "bread": { "base": "game:item/food/grain/{type}bread" },
+            "jam": { "base": "game:block/food/pie/fill-{fruit}" },
+            "peanutbutter": {
+              "base": "scoopofjammod:block/food/pie/fill-{nutpaste}"
+            }
+          }
+        }
+      }
+    },
     {
       "name": "GroundStorable",
       "properties": {
@@ -38,71 +46,56 @@
     },
     {
       "name": "scoopofjammod.ExtraSatiety"
-    }
-  ],
-  "shape": { "base": "item/pbandj" },
-  "textures": {
-    "bread": { "base": "game:item/food/grain/{type}bread" },
-    "jamByType": {
-      "*-pineapple-*": {
-        "base": "game:block/food/pie/fill-pineapple"
-      },
-      "*apple-*": {
-        "base": "game:block/food/pie/fill-apple"
-      },
-      "*": {
-        "base": "game:block/food/pie/fill-{fruit}"
-      }
     },
-    "peanutbutter": { "base": "block/food/pie/fill-peanutbutter" }
-  },
-  "creativeinventoryStacks": [
     {
-      "tabs": ["general", "items"],
-      "stacks": [
-        {
-          "type": "Item",
-          "code": "scoopofjammod:pbandj-{type}-perfect-{fruit}-{nutpaste}",
-          "attributes": {
-            "secondFruitCode": "game:fruit-{fruit}",
-            "extraNutrition": {
-              "FruitByType": {
-                "@.*-(saguaro|cranberry)": 170.0,
-                "@.*-(cherry|lychee)": 140.0,
-                "*-breadfruit": 330.0,
-                "*": 200.0
-              },
-              "Protein": 160.0
-            }
-          }
-        }
-      ]
+      "name": "scoopofjammod.AttributeVariants",
+      "properties": {
+        "attributeVariants": [
+          {
+            "code": "type",
+            "states": [
+              "spelt",
+              "rye",
+              "flax",
+              "rice",
+              "cassava",
+              "amaranth",
+              "sunflower"
+            ]
+          },
+          { "loadFromProperties": "block/fruit" },
+          { "code": "nutpaste", "states": ["peanutbutter"] }
+        ]
+      }
     }
   ],
   "attributes": {
-    "handbook": { "groupBy": ["pbandj-*"] },
+    "handbook": { "groupBy": ["pbandj"] },
     "displaycaseable": true,
     "shelvable": true
   },
-  "nutritionPropsByType": {
-    "*-flax-*": { "saturation": 160, "foodcategory": "Grain" },
-
-    "*-rice-*": { "saturation": 330, "foodcategory": "Grain" },
-
-    "*": { "saturation": 300, "foodcategory": "Grain" }
+  "shape": { "base": "item/pbandj" },
+  // Just a default
+  "textures": {
+    "bread": { "base": "game:item/food/grain/speltbread" },
+    "jam": {
+      "base": "game:block/food/pie/fill-pineapple"
+    },
+    "peanutbutter": { "base": "block/food/pie/fill-peanutbutter" }
   },
-  "transitionablePropsByType": {
-    "*-perfect-*": [
-      {
-        "type": "Perish",
-        "freshHours": { "avg": 192 },
-        "transitionHours": { "avg": 36 },
-        "transitionedStack": { "type": "item", "code": "game:rot" },
-        "transitionRatio": 1
-      }
-    ]
-  },
+  "nutritionProps": { "saturation": 0, "foodcategory": "Grain" },
+  "transitionableProps": [
+    {
+      "type": "Perish",
+      "freshHours": { "avg": 192 },
+      "transitionHours": { "avg": 36 },
+      "transitionedStack": { "type": "item", "code": "game:rot" },
+      "transitionRatio": 1
+    }
+  ],
+  "maxstacksize": 32,
   "materialDensity": 200,
+  // creativeinventoryStacks is created in the code
   "guiTransform": {
     "translation": { "x": 0, "y": 0, "z": 0 },
     "rotation": { "x": -30, "y": 26, "z": 180 },

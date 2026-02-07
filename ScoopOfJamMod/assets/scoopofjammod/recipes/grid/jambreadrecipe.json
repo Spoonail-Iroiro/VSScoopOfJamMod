@@ -23,7 +23,13 @@
     },
     "output": {
       "type": "item",
-      "code": "jambread-{bread}-perfect-{fruit}"
+      "code": "jambread",
+      "attributes": {
+        "types": {
+          "type": "{bread}",
+          "fruit": "{fruit}"
+        }
+      }
     }
   }
 ]

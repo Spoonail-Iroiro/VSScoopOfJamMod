@@ -1,26 +1,26 @@
 {
   "code": "jambread",
-  "class": "scoopofjammod.ItemJamBread",
-  "maxstacksizeByType": {
-    "*": 32
-  },
-  "variantgroups": [
-    {
-      "code": "type",
-      "states": [
-        "spelt",
-        "rye",
-        "flax",
-        "rice",
-        "cassava",
-        "amaranth",
-        "sunflower"
-      ]
-    },
-    { "code": "state", "states": ["perfect"] },
-    { "loadFromProperties": "block/fruit" }
-  ],
+  "class": "scoopofjammod.ItemJamBreadAttributeVariants",
   "behaviors": [
+    {
+      "name": "AttributeRenderingLibrary.ShapeTexturesFromAttributes",
+      "properties": {
+        "textures": {
+          "type-*::fruit-pineapple": {
+            "bread": { "base": "game:item/food/grain/{type}bread" },
+            "jam": { "base": "game:block/food/pie/fill-pineapple" }
+          },
+          "type-*::fruit-*apple": {
+            "bread": { "base": "game:item/food/grain/{type}bread" },
+            "jam": { "base": "game:block/food/pie/fill-apple" }
+          },
+          "type-*::fruit-*": {
+            "bread": { "base": "game:item/food/grain/{type}bread" },
+            "jam": { "base": "game:block/food/pie/fill-{fruit}" }
+          }
+        }
+      }
+    },
     {
       "name": "GroundStorable",
       "properties": {
@@ -37,59 +37,47 @@
     },
     {
       "name": "scoopofjammod.ExtraSatiety"
-    }
-  ],
-  "shape": { "base": "item/jambread" },
-  "texturesbytype": {
-    "*-pineapple": {
-      "bread": { "base": "game:item/food/grain/{type}bread" },
-      "jam": { "base": "game:block/food/pie/fill-pineapple" }
     },
-    "*apple": {
-      "bread": { "base": "game:item/food/grain/{type}bread" },
-      "jam": { "base": "game:block/food/pie/fill-apple" }
-    },
-    "*": {
-      "bread": { "base": "game:item/food/grain/{type}bread" },
-      "jam": { "base": "game:block/food/pie/fill-{fruit}" }
-    }
-  },
-  "creativeinventoryStacks": [
     {
-      "tabs": ["general", "items"],
-      "stacks": [
-        {
-          "type": "Item",
-          "code": "scoopofjammod:jambread-{type}-perfect-{fruit}",
-          "attributes": {
-            "secondFruitCode": "game:fruit-{fruit}",
-            "extraNutrition": {
-              "FruitByType": {
-                "@.*-(saguaro|cranberry)": 170.0,
-                "@.*-(cherry|lychee)": 140.0,
-                "*-breadfruit": 330.0,
-                "*": 200.0
-              }
-            }
+      "name": "scoopofjammod.AttributeVariants",
+      "properties": {
+        "attributeVariants": [
+          {
+            "code": "type",
+            "states": [
+              "spelt",
+              "rye",
+              "flax",
+              "rice",
+              "cassava",
+              "amaranth",
+              "sunflower"
+            ]
+          },
+          {
+            "loadFromProperties": "block/fruit"
           }
-        }
-      ]
+        ]
+      }
     }
   ],
   "attributes": {
-    "handbook": { "groupBy": ["jambread-*"] },
+    "handbook": { "groupBy": ["jambread"] },
     "displaycaseable": true,
     "shelvable": true
   },
+  "shape": { "base": "item/jambread" },
+  // Just a default
+  "textures": {
+    "bread": { "base": "game:item/food/grain/speltbread" },
+    "jam": { "base": "game:block/food/pie/fill-pineapple" }
+  },
+  // "creativeinventoryStacks" is created in code
   "nutritionPropsByType": {
-    "*-flax-*": { "saturation": 160, "foodcategory": "Grain" },
-
-    "*-rice-*": { "saturation": 330, "foodcategory": "Grain" },
-
-    "*": { "saturation": 300, "foodcategory": "Grain" }
+    "*": { "saturation": 0, "foodcategory": "Grain" }
   },
   "transitionablePropsByType": {
-    "*-perfect-*": [
+    "*": [
       {
         "type": "Perish",
         "freshHours": { "avg": 192 },
@@ -98,6 +86,9 @@
         "transitionRatio": 1
       }
     ]
+  },
+  "maxstacksizeByType": {
+    "*": 32
   },
   "materialDensity": 200,
   "guiTransform": {
