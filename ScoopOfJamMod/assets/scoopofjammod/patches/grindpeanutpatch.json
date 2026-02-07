@@ -2,11 +2,13 @@
   {
     "op": "add",
     "file": "game:itemtypes/food/legume.json",
-    "path": "/grindingProps",
+    "path": "/grindingPropsByType",
     "value": {
-      "groundStack": {
-        "type": "item",
-        "code": "scoopofjammod:nutpaste-peanutbutter"
+      "*-peanut": {
+        "groundStack": {
+          "type": "item",
+          "code": "scoopofjammod:nutpaste-peanutbutter"
+        }
       }
     }
   }
