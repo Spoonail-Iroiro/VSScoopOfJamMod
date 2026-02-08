@@ -116,5 +116,8 @@
   "note-pbandj-missing-nutrition": "(+ Nutrition from ingredients)",
 
   "item-jambread": "Bread with jam (Unknown content)",
-  "item-pbandj": "PB&J (Unknown content)"
+  "item-pbandj": "PB&J (Unknown content)",
+
+  "game:tabname-scoopofjammod": "Scoop of Jam",
+  "game:tabname-scoopofjammod-legacy": "Scoop of Jam (Legacy)"
 }

@@ -116,5 +116,8 @@
   "note-pbandj-missing-nutrition": "(+ 具材からの栄養分)",
 
   "item-jambread": "ジャムパン（内容不明）",
-  "item-pbandj": "PB&J（内容不明）"
+  "item-pbandj": "PB&J（内容不明）",
+
+  "game:tabname-scoopofjammod": "Scoop of Jam",
+  "game:tabname-scoopofjammod-legacy": "Scoop of Jam （レガシー）"
 }
