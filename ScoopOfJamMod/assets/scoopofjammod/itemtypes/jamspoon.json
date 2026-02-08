@@ -29,7 +29,8 @@
   "creativeinventory": {
     "general": ["*"],
     "items": ["*"],
-    "tools": ["*"]
+    "tools": ["*"],
+    "scoopofjammod": ["*"]
   },
   "maxstacksize": 1,
   "materialDensity": 210,
