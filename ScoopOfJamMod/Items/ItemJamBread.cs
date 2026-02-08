@@ -114,4 +114,31 @@ public class ItemJamBread : Item, IHandBookPageCodeProvider {
         var code = GuiHandbookItemStackPage.PageCodeForStack(stackForPage);
         return code;
     }
+
+    public override ItemStack OnTransitionNow(ItemSlot slot, TransitionableProperties props) {
+        var outItemStack = base.OnTransitionNow(slot, props);
+        if (slot.Itemstack != null && outItemStack.Collectible.Code == $"{ScoopOfJamModModSystem.ModID}:jambread") {
+            ProcessAttributesForMigration(slot.Itemstack, outItemStack);
+        }
+
+        return outItemStack;
+    }
+
+    protected void ProcessAttributesForMigration(ItemStack sourceStack, ItemStack targetStack, bool removeTransitionState = true) {
+        if (targetStack?.Attributes == null || sourceStack?.Attributes == null)
+            return;
+
+        foreach (var entry in sourceStack.Attributes) {
+            targetStack.Attributes[entry.Key] = entry.Value;
+
+            if (entry.Key == "extraNutrition" && targetStack.Attributes[entry.Key] is ITreeAttribute treeAttr && sourceStack.Collectible.NutritionProps != null) {
+                treeAttr.SetDouble("Grain", sourceStack.Collectible.NutritionProps.Satiety);
+            }
+        }
+
+        if (removeTransitionState && targetStack.Attributes.HasAttribute("transitionstate")) {
+            targetStack.Attributes.RemoveAttribute("transitionstate");
+        }
+    }
+
 }
