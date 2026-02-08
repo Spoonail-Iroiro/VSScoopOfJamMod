@@ -97,6 +97,22 @@
         "transitionHours": { "avg": 36 },
         "transitionedStack": { "type": "item", "code": "game:rot" },
         "transitionRatio": 1
+      },
+      {
+        "type": "Dry",
+        "freshHours": { "avg": 0 },
+        "transitionHours": { "avg": 0.001 },
+        "transitionedStack": {
+          "type": "item",
+          "code": "scoopofjammod:jambread",
+          "attributes": {
+            "types": {
+              "type": "{type}",
+              "fruit": "{fruit}"
+            }
+          }
+        },
+        "transitionRatio": 1
       }
     ]
   },
