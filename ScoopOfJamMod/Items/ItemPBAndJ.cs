@@ -78,7 +78,7 @@ public class ItemPBAndJ : ItemJamBreadAttributeVariants {
             new CreativeTabAndStackList
             {
                 Stacks = stacks.ToArray(),
-                Tabs = new string[] { "general", "decorative" }
+                Tabs = new string[] { "general", "decorative", "scoopofjammod" }
             }
         ];
     }

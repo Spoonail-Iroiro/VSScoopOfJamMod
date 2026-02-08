@@ -57,7 +57,7 @@
   },
   "creativeinventoryStacks": [
     {
-      "tabs": ["general", "items"],
+      "tabs": ["general", "items", "scoopofjammod"],
       "stacks": [
         {
           "type": "Item",
