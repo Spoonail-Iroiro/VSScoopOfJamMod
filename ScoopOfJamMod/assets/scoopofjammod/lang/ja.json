@@ -16,7 +16,6 @@
   "jambread-amaranth-perfect-template": "アマランサスの{0}ジャムパン",
   "jambread-sunflower-perfect-template": "ヒマワリの{0}ジャムパン",
   "pineapple-in-jam-name-cased": "パイナップル",
-  "note-jambread-fruit-nutrition": "（＋ジャムの果物栄養分）",
   "game:ingameerror-scoopofjammod-jamcheckfatal": "{0}",
   "game:ingameerror-scoopofjammod-jamcheckstrictfailed": "材料が正しくないため、ジャムをすくうことができません。. {0}{1}",
   "game:ingameerror-scoopofjammod-jamcheckdifferentfruitnutritions": "ジャム中の2種のフルーツは同じ栄養価である必要があります (例：赤フサスグリとザクロ)。 {0}{1}",
@@ -113,7 +112,7 @@
   "pie-single-scoopofjammod:nutpaste-peanutbutter-perfect": "ピーナッツバターパイ",
   "pie-single-scoopofjammod:nutpaste-peanutbutter-charred": "ピーナッツバターパイ（黒焦げ）",
 
-  "note-pbandj-missing-nutrition": "(+ 具材からの栄養分)",
+  "note-missing-extra-nutrition": "(+ 具材からの栄養分)",
 
   "item-jambread": "ジャムパン（内容不明）",
   "item-pbandj": "PB&J（内容不明）",

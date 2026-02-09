@@ -8,8 +8,6 @@ using Vintagestory.API.Datastructures;
 
 namespace ScoopOfJamMod.Items;
 public class ItemPBAndJ : ItemJamBreadAttributeVariants {
-    protected override string TranslationKeyNoNutritionNote => "note-pbandj-missing-nutrition";
-
     public override string GetHeldItemName(ItemStack itemStack) {
         var variant = AttributeVariantsHelper.GetVariant(itemStack);
         var firstFruit = variant?["fruit"];
