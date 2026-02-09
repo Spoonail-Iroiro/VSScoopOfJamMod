@@ -15,8 +15,6 @@ namespace ScoopOfJamMod.Items;
 
 
 public class ItemJamBread : Item, IHandBookPageCodeProvider {
-    protected virtual string TranslationKeyNoNutritionNote => "note-jambread-fruit-nutrition";
-
     public override string GetHeldItemName(ItemStack itemStack) {
         var firstFruit = itemStack.Item?.Variant["fruit"];
         var grain = itemStack.Item?.Variant["type"];
@@ -43,8 +41,9 @@ public class ItemJamBread : Item, IHandBookPageCodeProvider {
 
         if (extraNut == null) {
             // No extra nutrition info found (such as in handbook recipe output), but provides note anyway
-            dsc.AppendLine(Lang.Get(TrUtil.LK(TranslationKeyNoNutritionNote)));
+            dsc.AppendLine(Lang.Get(TrUtil.LK("note-missing-extra-nutrition")));
         }
+
 
     }
 

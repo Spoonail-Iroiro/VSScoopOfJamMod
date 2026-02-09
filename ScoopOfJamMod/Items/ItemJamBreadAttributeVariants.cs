@@ -15,8 +15,6 @@ using Vintagestory.GameContent;
 namespace ScoopOfJamMod.Items;
 
 public class ItemJamBreadAttributeVariants : Item, IHandBookPageCodeProvider {
-    protected virtual string TranslationKeyNoNutritionNote => "note-jambread-fruit-nutrition";
-
     public override void OnLoaded(ICoreAPI api) {
         base.OnLoaded(api);
         AddCreativeInventoryStacks(api);
@@ -49,7 +47,7 @@ public class ItemJamBreadAttributeVariants : Item, IHandBookPageCodeProvider {
 
         if (extraNut == null) {
             // No extra nutrition info found (such as in handbook recipe output), but provides note anyway
-            dsc.AppendLine(Lang.Get(TrUtil.LK(TranslationKeyNoNutritionNote)));
+            dsc.AppendLine(Lang.Get(TrUtil.LK("note-missing-extra-nutrition")));
         }
 
     }
