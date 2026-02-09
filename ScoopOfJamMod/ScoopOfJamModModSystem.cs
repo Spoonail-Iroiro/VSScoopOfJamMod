@@ -35,7 +35,6 @@ namespace ScoopOfJamMod {
 
         public override void Start(ICoreAPI api) {
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemJamSpoon), typeof(ItemJamSpoon));
-            api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemJamBread), typeof(ItemJamBread));
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemScoopOfJam), typeof(ItemScoopOfJam));
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemPBAndJ), typeof(ItemPBAndJ));
             api.RegisterItemClass(Mod.Info.ModID + "." + nameof(ItemJamBreadAttributeVariants), typeof(ItemJamBreadAttributeVariants));
