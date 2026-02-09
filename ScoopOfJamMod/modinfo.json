@@ -3,8 +3,8 @@
   "modid": "scoopofjammod",
   "name": "Scoop of Jam",
   "authors": ["Spoonail"],
-  "description": "Scoop jam with a spoon to make jam sandwiches and jam pies!",
-  "version": "0.2.0-rc.3",
+  "description": "Scoop jam with a spoon to make jam sandwiches, jam pies, and PB&J!",
+  "version": "v0.2.0",
   "dependencies": {
     "game": "1.21.0",
     "attributerenderinglibrary": "*"
