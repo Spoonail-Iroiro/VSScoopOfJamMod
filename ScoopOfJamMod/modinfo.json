@@ -4,7 +4,7 @@
   "name": "Scoop of Jam",
   "authors": ["Spoonail"],
   "description": "Scoop jam with a spoon to make jam sandwiches, jam pies, and PB&J!",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "dependencies": {
     "game": "1.21.0",
     "attributerenderinglibrary": "*"
