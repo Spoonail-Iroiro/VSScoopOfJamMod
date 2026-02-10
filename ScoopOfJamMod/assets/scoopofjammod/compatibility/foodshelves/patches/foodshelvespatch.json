@@ -1,0 +1,32 @@
+[
+  {
+    "op": "addEach",
+    "file": "foodshelves:config/restrictions/general/fooduniversal.json",
+    "path": "/CollectibleCodes/-",
+    "value": [
+      //
+      "scoopofjammod:jambread",
+      "scoopofjammod:pbandj"
+    ]
+  },
+  {
+    "op": "addEach",
+    "file": "foodshelves:config/restrictions/general/holderuniversal.json",
+    "path": "/CollectibleCodes/-",
+    "value": [
+      //
+      "scoopofjammod:jambread",
+      "scoopofjammod:pbandj"
+    ]
+  },
+  {
+    "op": "addEach",
+    "file": "foodshelves:config/restrictions/shelves/breadshelf.json",
+    "path": "/CollectibleCodes/-",
+    "value": [
+      //
+      "scoopofjammod:jambread",
+      "scoopofjammod:pbandj"
+    ]
+  }
+]
