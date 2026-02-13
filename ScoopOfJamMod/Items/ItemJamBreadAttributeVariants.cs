@@ -24,7 +24,8 @@ public class ItemJamBreadAttributeVariants : Item, IHandBookPageCodeProvider {
         var variant = AttributeVariantsHelper.GetVariant(itemStack);
         var firstFruit = variant?["fruit"];
         var grain = variant?["type"];
-        if (firstFruit == null || grain == null) return base.GetHeldItemName(itemStack);
+        var nutpaste = variant?["nutpaste"];
+        if (firstFruit == null || grain == null || nutpaste == null) return base.GetHeldItemName(itemStack);
 
         var scoopOfJamAttribute = ScoopOfJamAttribute.FromTreeAttribute(itemStack.Attributes);
 
@@ -118,34 +119,26 @@ public class ItemJamBreadAttributeVariants : Item, IHandBookPageCodeProvider {
 
         var stacks = new List<JsonItemStack>();
 
-        var template = """
-        {
-          "types": {
-            "type": "{grain}",
-            "fruit": "{fruit}"
-          },
-          "secondFruitCode": "game:fruit-{fruit}",
-          "extraNutrition": {
-            "Fruit": {fruitSat},
-            "Grain": {grainSat}
-          }
-        }
-        """;
-
         foreach (var variant in allVariants) {
             var fruit = variant["fruit"];
             var grain = variant["type"];
 
-            var attrStr = template
-                .Replace("{fruit}", variant["fruit"])
-                .Replace("{grain}", variant["type"])
-                .Replace("{fruitSat}", $"{NutritionUtil.VanillaFruitCodeToJamScoopSatiety(fruit!):F1}")
-                .Replace("{grainSat}", $"{NutritionUtil.VanillaGrainCodeToBreadSatiety(grain!):F1}");
+            var attrJToken = new JObject {
+                ["types"] = new JObject {
+                    ["type"] = grain,
+                    ["fruit"] = fruit,
+                },
+                ["secondFruitCode"] = $"game:fruit-{fruit}",
+                ["extraNutrition"] = new JObject {
+                    ["Fruit"] = NutritionUtil.VanillaFruitCodeToJamScoopSatiety(fruit!),
+                    ["Grain"] = NutritionUtil.VanillaGrainCodeToBreadSatiety(grain!)
+                }
+            };
 
             var jsonStack = new JsonItemStack() {
                 Code = this.Code,
                 Type = EnumItemClass.Item,
-                Attributes = new JsonObject(JToken.Parse(attrStr))
+                Attributes = new JsonObject(attrJToken)
             };
             jsonStack.Resolve(api.World, this.Code + " type");
             stacks.Add(jsonStack);
